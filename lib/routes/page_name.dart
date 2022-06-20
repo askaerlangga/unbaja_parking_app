@@ -1,4 +1,5 @@
 abstract class PageName {
-  static const home = '/home';
+  static const home = '/';
   static const login = '/login';
+  static const signup = '/signup';
 }

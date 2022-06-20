@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:unbaja_parking_app/controllers/login_page_controller.dart';
+import 'package:unbaja_parking_app/routes/page_name.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
+  LoginPage({Key? key}) : super(key: key);
+  final loginPageController = Get.find<LoginPageController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +40,8 @@ class LoginPage extends StatelessWidget {
               children: <Widget>[
                 // Textfield Email
                 TextField(
-                  decoration: InputDecoration(
+                  controller: loginPageController.email,
+                  decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.email),
                       labelText: 'Email',
                       border: OutlineInputBorder()),
@@ -48,12 +52,15 @@ class LoginPage extends StatelessWidget {
 
                 // Textfield Password
                 TextField(
+                  controller: loginPageController.password,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.lock),
                       labelText: 'Password',
                       border: OutlineInputBorder()),
                 ),
+
+                // Tombol lupa password
                 Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -63,17 +70,16 @@ class LoginPage extends StatelessWidget {
                           style:
                               TextStyle(decoration: TextDecoration.underline),
                         ))),
-                // const SizedBox(
-                //   height: 10,
-                // ),
 
                 // Tombol Login
-                Container(
+                SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 50,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.orange),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offNamed(PageName.home);
+                        },
                         child: Text('LOGIN'))),
 
                 // Tombol Daftar akun
@@ -81,7 +87,11 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const Text('Belum punya akun?'),
-                    TextButton(onPressed: () {}, child: const Text('Daftar')),
+                    TextButton(
+                        onPressed: () {
+                          Get.toNamed(PageName.signup);
+                        },
+                        child: const Text('Daftar')),
                   ],
                 )
               ],
