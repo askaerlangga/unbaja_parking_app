@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unbaja_parking_app/controllers/auth_controller.dart';
 import 'package:unbaja_parking_app/routes/page_name.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+  final authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,8 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Get.offAllNamed(PageName.login);
+                authController.logout();
+                // Get.offAllNamed(PageName.login);
               },
               icon: Icon(Icons.logout))
         ],
