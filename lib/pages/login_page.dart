@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unbaja_parking_app/controllers/auth_controller.dart';
 import 'package:unbaja_parking_app/controllers/login_page_controller.dart';
 import 'package:unbaja_parking_app/routes/page_name.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
   final loginPageController = Get.find<LoginPageController>();
+  final authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +87,8 @@ class LoginPage extends StatelessWidget {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.orange),
                         onPressed: () {
-                          Get.offNamed(PageName.home);
+                          authController.login(loginPageController.email.text,
+                              loginPageController.password.text);
                         },
                         child: Text('LOGIN'))),
 
