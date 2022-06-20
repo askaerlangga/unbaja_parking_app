@@ -51,13 +51,20 @@ class LoginPage extends StatelessWidget {
                 ),
 
                 // Textfield Password
-                TextField(
-                  controller: loginPageController.password,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.lock),
-                      labelText: 'Password',
-                      border: OutlineInputBorder()),
+                Obx(
+                  () => TextField(
+                    controller: loginPageController.password,
+                    obscureText: loginPageController.obsecure.value,
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock),
+                        labelText: 'Password',
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              loginPageController.obsecure.toggle();
+                            },
+                            icon: Icon(Icons.remove_red_eye)),
+                        border: OutlineInputBorder()),
+                  ),
                 ),
 
                 // Tombol lupa password

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
+import 'package:unbaja_parking_app/bindings/signup_page_binding.dart';
+import 'package:unbaja_parking_app/controllers/signup_page_controller.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+  SignUpPage({Key? key}) : super(key: key);
+  final signUpPageController = Get.find<SignUpPageController>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +27,26 @@ class SignUpPage extends StatelessWidget {
         ),
 
         // Textfield Password
-        TextField(
-          // controller: textfieldController.password,
-          obscureText: true,
-          decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.lock),
-              labelText: 'Password',
-              border: OutlineInputBorder()),
+        Obx(
+          () => TextField(
+            // controller: textfieldController.password,
+            obscureText: signUpPageController.obsecure.value,
+            decoration: InputDecoration(
+                prefixIcon: Icon(Icons.lock),
+                labelText: 'Password',
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      signUpPageController.obsecure.toggle();
+                    },
+                    icon: Icon(Icons.remove_red_eye)),
+                border: OutlineInputBorder()),
+          ),
         ),
         SizedBox(
           height: 20,
         ),
+
+        // Tombol Daftar
         SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 50,
