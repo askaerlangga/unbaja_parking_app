@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,12 @@ class MyApp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           return GetMaterialApp(
             title: 'UNBAJA Parking',
-            initialRoute: snapshot.data != null ? Routes.HOME : Routes.LOGIN,
+
+            // Cek email verifikasi
+            initialRoute: (snapshot.data != null &&
+                    (snapshot.data as User).emailVerified != false)
+                ? Routes.HOME
+                : Routes.LOGIN,
             getPages: AppPages.routes,
           );
         }
