@@ -10,21 +10,24 @@ class LoginController extends GetxController {
 
   // Alert Dialog
   void alertDialog(String message) {
-    Get.defaultDialog(title: 'Perhatian!', middleText: message);
+    Get.defaultDialog(title: 'Perhatian', middleText: message);
   }
 
   // Fungsi Login
   void login(String email, String password) async {
     try {
-      await FirebaseAuth.instance
+      final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      Get.offNamed(Routes.HOME);
+      if (credential.user!.emailVerified) {
+        Get.offNamed(Routes.HOME);
+      } else {
+        alertDialog(
+            'Akun kamu belum diverifikasi, silahkan cek email kamu untuk verifikasi');
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        // print('No user found for that email.');
         alertDialog('Email tersebut tidak terdaftar');
       } else if (e.code == 'wrong-password') {
-        // print('Wrong password provided for that user.');
         alertDialog('Password yang anda masukan salah');
       }
     }

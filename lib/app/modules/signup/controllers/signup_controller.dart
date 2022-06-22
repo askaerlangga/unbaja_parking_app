@@ -17,10 +17,15 @@ class SignupController extends GetxController {
   void signup(String email, String password) async {
     try {
       if (this.email.text != '' && this.password.text != '') {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        final credential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
+
+        // Verifikasi Email
+        await credential.user!.sendEmailVerification();
+
         Get.defaultDialog(
             title: 'Daftar akun berhasil',
             middleText: 'Sekarang kamu sudah bisa login',
