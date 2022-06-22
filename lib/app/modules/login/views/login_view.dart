@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:unbaja_parking_app/controllers/auth_controller.dart';
-import 'package:unbaja_parking_app/controllers/login_page_controller.dart';
-import 'package:unbaja_parking_app/routes/page_name.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
-  final loginPageController = Get.find<LoginPageController>();
-  final authController = Get.find<AuthController>();
+import 'package:get/get.dart';
+import 'package:unbaja_parking_app/app/routes/app_pages.dart';
+
+import '../controllers/login_controller.dart';
+
+class LoginView extends GetView<LoginController> {
+  const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +41,7 @@ class LoginPage extends StatelessWidget {
               children: <Widget>[
                 // Textfield Email
                 TextField(
-                  controller: loginPageController.email,
+                  controller: controller.email,
                   decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.email),
                       labelText: 'Email',
@@ -55,14 +54,14 @@ class LoginPage extends StatelessWidget {
                 // Textfield Password
                 Obx(
                   () => TextField(
-                    controller: loginPageController.password,
-                    obscureText: loginPageController.obsecure.value,
+                    controller: controller.password,
+                    obscureText: controller.obsecure.value,
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.lock),
                         labelText: 'Password',
                         suffixIcon: IconButton(
                             onPressed: () {
-                              loginPageController.obsecure.toggle();
+                              controller.obsecure.toggle();
                             },
                             icon: Icon(Icons.remove_red_eye)),
                         border: OutlineInputBorder()),
@@ -87,8 +86,8 @@ class LoginPage extends StatelessWidget {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.orange),
                         onPressed: () {
-                          authController.login(loginPageController.email.text,
-                              loginPageController.password.text);
+                          controller.login(
+                              controller.email.text, controller.password.text);
                         },
                         child: Text('LOGIN'))),
 
@@ -99,7 +98,7 @@ class LoginPage extends StatelessWidget {
                     const Text('Belum punya akun?'),
                     TextButton(
                         onPressed: () {
-                          Get.toNamed(PageName.signup);
+                          Get.toNamed(Routes.SIGNUP);
                         },
                         child: const Text('Daftar')),
                   ],

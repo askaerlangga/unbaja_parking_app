@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:get/get.dart';
-import 'package:unbaja_parking_app/bindings/signup_page_binding.dart';
-import 'package:unbaja_parking_app/controllers/auth_controller.dart';
-import 'package:unbaja_parking_app/controllers/signup_page_controller.dart';
 
-class SignUpPage extends StatelessWidget {
-  SignUpPage({Key? key}) : super(key: key);
-  final signUpPageController = Get.find<SignUpPageController>();
-  final authcontroller = Get.find<AuthController>();
+import '../controllers/signup_controller.dart';
 
+class SignupView extends GetView<SignupController> {
+  const SignupView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +13,7 @@ class SignUpPage extends StatelessWidget {
       body: ListView(padding: EdgeInsets.all(20), children: <Widget>[
         // Textfield Email
         TextField(
-          controller: signUpPageController.email,
+          controller: controller.email,
           decoration: const InputDecoration(
               prefixIcon: Icon(Icons.email),
               labelText: 'Email',
@@ -31,14 +26,14 @@ class SignUpPage extends StatelessWidget {
         // Textfield Password
         Obx(
           () => TextField(
-            controller: signUpPageController.password,
-            obscureText: signUpPageController.obsecure.value,
+            controller: controller.password,
+            obscureText: controller.obsecure.value,
             decoration: InputDecoration(
                 prefixIcon: Icon(Icons.lock),
                 labelText: 'Password',
                 suffixIcon: IconButton(
                     onPressed: () {
-                      signUpPageController.obsecure.toggle();
+                      controller.obsecure.toggle();
                     },
                     icon: Icon(Icons.remove_red_eye)),
                 border: OutlineInputBorder()),
@@ -55,8 +50,8 @@ class SignUpPage extends StatelessWidget {
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.orange),
                 onPressed: () {
-                  authcontroller.signup(signUpPageController.email.text,
-                      signUpPageController.password.text);
+                  controller.signup(
+                      controller.email.text, controller.password.text);
                 },
                 child: Text('DAFTAR'))),
       ]),
