@@ -28,7 +28,8 @@ class SignupController extends GetxController {
 
         Get.defaultDialog(
             title: 'Daftar akun berhasil',
-            middleText: 'Sekarang kamu sudah bisa login',
+            middleText:
+                'Link verifikasi sudah dikirim ke Email kamu, silahkan verifikasi untuk menggunakan Akun',
             onConfirm: () {
               Get.back();
               Get.back();
