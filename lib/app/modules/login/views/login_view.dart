@@ -72,7 +72,9 @@ class LoginView extends GetView<LoginController> {
                 Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed(Routes.FORGOT_PASSWORD);
+                        },
                         child: const Text(
                           'Lupa password?',
                           style:
