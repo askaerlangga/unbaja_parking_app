@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ class SignupController extends GetxController {
 
   // Fungsi SignUp
   void signup(String email, String password) async {
+    var db = FirebaseFirestore.instance;
     try {
       if (this.email.text != '' && this.password.text != '') {
         final credential =
@@ -25,6 +27,13 @@ class SignupController extends GetxController {
 
         // Verifikasi Email
         await credential.user!.sendEmailVerification();
+
+        // User level ke firestore
+        db
+            .collection('users')
+            .doc(credential.user!.uid)
+            .set({'level': 'pengendara'}).onError(
+                (error, stackTrace) => print('Gagal menulis data ${error}'));
 
         Get.defaultDialog(
             title: 'Daftar akun berhasil',
