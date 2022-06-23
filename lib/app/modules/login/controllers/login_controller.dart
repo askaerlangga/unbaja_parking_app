@@ -10,7 +10,11 @@ class LoginController extends GetxController {
 
   // Alert Dialog
   void alertDialog(String message) {
-    Get.defaultDialog(title: 'Perhatian', middleText: message);
+    Get.defaultDialog(
+        title: 'Perhatian',
+        middleText: message,
+        onCancel: () => Get.back(),
+        textCancel: 'Ok');
   }
 
   // Fungsi Login
@@ -21,8 +25,19 @@ class LoginController extends GetxController {
       if (credential.user!.emailVerified) {
         Get.offNamed(Routes.HOME);
       } else {
-        alertDialog(
-            'Akun kamu belum diverifikasi, silahkan cek email kamu untuk verifikasi');
+        Get.defaultDialog(
+            title: 'Perhatian',
+            middleText:
+                'Akun kamu belum diverifikasi, silahkan cek email kamu untuk verifikasi',
+            onCancel: () => Get.back(),
+            onConfirm: () async {
+              Get.back();
+              alertDialog('Berhasil kirim ulang Email verifikasi');
+              await credential.user!.sendEmailVerification();
+            },
+            textCancel: 'Ok',
+            textConfirm: 'Kirim ulang',
+            confirmTextColor: Colors.white);
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
