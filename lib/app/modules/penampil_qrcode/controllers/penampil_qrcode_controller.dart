@@ -1,23 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class PenampilQrcodeController extends GetxController {
-  //TODO: Implement PenampilQrcodeController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  Future<DocumentSnapshot<Object?>> getUserData(String uid) {
+    var db = FirebaseFirestore.instance;
+    DocumentReference user = db.collection("users").doc(uid);
+    return user.get();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

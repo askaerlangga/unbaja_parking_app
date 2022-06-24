@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -18,10 +19,20 @@ class PenampilQrcodeView extends GetView<PenampilQrcodeController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            QrImage(
-              data: "1234567890",
-              version: QrVersions.auto,
-              size: 250,
+            FutureBuilder<DocumentSnapshot<Object?>>(
+              future: controller.getUserData(Get.arguments),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  var data = (snapshot.data!.data() as Map<String, dynamic>);
+                  print(data['kendaraan_utama']);
+                  return QrImage(
+                    data: data['kendaraan_utama'],
+                    version: QrVersions.auto,
+                    size: 250,
+                  );
+                }
+                return const CircularProgressIndicator();
+              },
             ),
             const Text(
               'SCAN QR CODE INI',

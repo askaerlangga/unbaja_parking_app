@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:unbaja_parking_app/app/controllers/auth_controller.dart';
 import 'package:unbaja_parking_app/app/modules/home/controllers/home_controller.dart';
 import 'package:unbaja_parking_app/app/modules/home/views/widgets/menu_button.dart';
 import 'package:unbaja_parking_app/app/modules/home/views/widgets/user_info_panel.dart';
@@ -38,7 +39,9 @@ class PengendaraView extends GetView<HomeController> {
                   label: 'Tampil QR Code',
                   icon: Icons.qr_code,
                   onPressed: () {
-                    Get.toNamed(Routes.PENAMPIL_QRCODE);
+                    var auth = Get.find<AuthController>();
+                    Get.toNamed(Routes.PENAMPIL_QRCODE,
+                        arguments: auth.uid.value);
                   }),
               MenuButton(
                   label: 'Kendaraan Saya',
