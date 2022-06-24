@@ -45,10 +45,6 @@ class AdminView extends GetView<HomeController> {
                   label: 'Data Kendaraan',
                   icon: Icons.directions_car,
                   onPressed: () {}),
-              // MenuButton(
-              //     label: 'Kendaraan Terparkir',
-              //     icon: Icons.local_parking,
-              //     onPressed: () {}),
               MenuButton(label: 'Laporan', icon: Icons.print, onPressed: () {}),
             ],
           ),
