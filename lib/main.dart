@@ -24,14 +24,21 @@ class MyApp extends StatelessWidget {
       builder: (context, snapshot) {
         print(snapshot);
         if (snapshot.connectionState == ConnectionState.active) {
+          if (snapshot.data != null &&
+              (snapshot.data as User).emailVerified != false) {
+            User user = snapshot.data as User;
+            authController.uid.value = user.uid;
+            return GetMaterialApp(
+              title: 'UNBAJA Parking',
+
+              // Cek email verifikasi
+              initialRoute: Routes.HOME,
+              getPages: AppPages.routes,
+            );
+          }
           return GetMaterialApp(
             title: 'UNBAJA Parking',
-
-            // Cek email verifikasi
-            initialRoute: (snapshot.data != null &&
-                    (snapshot.data as User).emailVerified != false)
-                ? Routes.HOME
-                : Routes.LOGIN,
+            initialRoute: Routes.LOGIN,
             getPages: AppPages.routes,
           );
         }

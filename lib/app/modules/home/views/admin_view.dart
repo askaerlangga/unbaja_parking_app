@@ -9,14 +9,14 @@ class AdminView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('UNBAJA Parking'),
+        title: const Text('ADMIN'),
         centerTitle: true,
         actions: [
           IconButton(
               onPressed: () {
                 controller.logout();
               },
-              icon: Icon(Icons.logout))
+              icon: const Icon(Icons.logout))
         ],
       ),
     );

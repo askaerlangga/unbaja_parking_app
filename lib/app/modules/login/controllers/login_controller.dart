@@ -23,7 +23,7 @@ class LoginController extends GetxController {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       if (credential.user!.emailVerified) {
-        Get.offNamed(Routes.HOME);
+        Get.offNamed(Routes.HOME, arguments: credential.user!.uid);
       } else {
         Get.defaultDialog(
             title: 'Perhatian',
