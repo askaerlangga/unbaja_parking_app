@@ -16,29 +16,50 @@ class PenampilQrcodeView extends GetView<PenampilQrcodeController> {
         centerTitle: true,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FutureBuilder<DocumentSnapshot<Object?>>(
-              future: controller.getUserData(Get.arguments),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  var data = (snapshot.data!.data() as Map<String, dynamic>);
-                  print(data['kendaraan_utama']);
-                  return QrImage(
-                    data: data['kendaraan_utama'],
-                    version: QrVersions.auto,
-                    size: 250,
-                  );
-                }
-                return const CircularProgressIndicator();
-              },
-            ),
-            const Text(
-              'SCAN QR CODE INI',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            )
-          ],
+        child: FutureBuilder<DocumentSnapshot<Object?>>(
+          future: controller.getUserData(Get.arguments),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              var data = (snapshot.data!.data() as Map<String, dynamic>);
+              print(data['kendaraan_utama']);
+              if (data['kendaraan_utama'] != null) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    QrImage(
+                      data: data['kendaraan_utama'],
+                      version: QrVersions.auto,
+                      size: 250,
+                    ),
+                    const Text(
+                      'SCAN QR CODE INI',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                );
+              }
+              return Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      'Kamu belum mengisi data kendaraan, dan pastikan kamu sudah memilih kendaraan utama',
+                      style: TextStyle(fontSize: 20),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {}, child: Text('Kendaraan Saya'))
+                  ],
+                ),
+              );
+            }
+            return const CircularProgressIndicator();
+          },
         ),
       ),
     );
