@@ -27,16 +27,6 @@ class AppPages {
       binding: HomeBinding(),
     ),
     GetPage(
-      name: _Paths.PENGENDARA,
-      page: () => const PengendaraView(),
-      binding: HomeBinding(),
-    ),
-    GetPage(
-      name: _Paths.ADMIN,
-      page: () => const AdminView(),
-      binding: HomeBinding(),
-    ),
-    GetPage(
       name: _Paths.LOGIN,
       page: () => const LoginView(),
       binding: LoginBinding(),

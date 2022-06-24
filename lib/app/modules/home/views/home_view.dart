@@ -6,6 +6,7 @@ import 'package:unbaja_parking_app/app/modules/home/controllers/home_controller.
 import 'package:unbaja_parking_app/app/modules/home/views/admin_view.dart';
 import 'package:unbaja_parking_app/app/modules/home/views/pengendara_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:unbaja_parking_app/app/modules/home/views/petugas_view.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class HomeView extends GetView<HomeController> {
             future: controller.userLevelCheck(
                 (Get.arguments == null) ? userUID : Get.arguments),
             builder: (context, snapshot) {
+              // Cek user level
               if (snapshot.connectionState == ConnectionState.done) {
                 var data =
                     (snapshot.data!.data() as Map<String, dynamic>)['level'];
@@ -27,6 +29,8 @@ class HomeView extends GetView<HomeController> {
                   return const AdminView();
                 } else if (data == 'pengendara') {
                   return const PengendaraView();
+                } else if (data == 'petugas') {
+                  return const PetugasView();
                 }
               }
               return const Scaffold(
