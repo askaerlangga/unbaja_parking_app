@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:unbaja_parking_app/app/modules/home/controllers/home_controller.dart';
 import 'package:unbaja_parking_app/app/modules/home/views/widgets/menu_button.dart';
 import 'package:unbaja_parking_app/app/modules/home/views/widgets/user_info_panel.dart';
+import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 
 class PengendaraView extends GetView<HomeController> {
   const PengendaraView({Key? key}) : super(key: key);
@@ -36,7 +37,9 @@ class PengendaraView extends GetView<HomeController> {
               MenuButton(
                   label: 'Tampil QR Code',
                   icon: Icons.qr_code,
-                  onPressed: () {}),
+                  onPressed: () {
+                    Get.toNamed(Routes.PENAMPIL_QRCODE);
+                  }),
               MenuButton(
                   label: 'Kendaraan Saya',
                   icon: Icons.directions_car,

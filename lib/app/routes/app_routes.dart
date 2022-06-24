@@ -8,6 +8,8 @@ abstract class Routes {
   static const SIGNUP = _Paths.SIGNUP;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const QRCODE_SCANNER = _Paths.QRCODE_SCANNER;
+  static const MENU_DATA_PENGGUNA = _Paths.MENU_DATA_PENGGUNA;
+  static const PENAMPIL_QRCODE = _Paths.PENAMPIL_QRCODE;
 }
 
 abstract class _Paths {
@@ -17,4 +19,6 @@ abstract class _Paths {
   static const SIGNUP = '/signup';
   static const FORGOT_PASSWORD = '/forgot-password';
   static const QRCODE_SCANNER = '/qrcode-scanner';
+  static const MENU_DATA_PENGGUNA = '/menu_data_pengguna';
+  static const PENAMPIL_QRCODE = '/penampil-qrcode';
 }
