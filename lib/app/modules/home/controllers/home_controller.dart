@@ -5,6 +5,9 @@ import 'package:unbaja_parking_app/app/controllers/auth_controller.dart';
 import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 
 class HomeController extends GetxController {
+  var nameUser = ''.obs;
+  var levelUser = ''.obs;
+
   // Fungsi cek user level
   Future<DocumentSnapshot<Object?>> userLevelCheck(String uid) {
     var db = FirebaseFirestore.instance;

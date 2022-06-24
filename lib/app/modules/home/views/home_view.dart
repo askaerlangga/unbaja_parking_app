@@ -22,14 +22,15 @@ class HomeView extends GetView<HomeController> {
             builder: (context, snapshot) {
               // Cek user level
               if (snapshot.connectionState == ConnectionState.done) {
-                var data =
-                    (snapshot.data!.data() as Map<String, dynamic>)['level'];
+                var data = (snapshot.data!.data() as Map<String, dynamic>);
                 print('PRINT SNAPSHOT ${data}');
-                if (data == 'admin') {
+                controller.nameUser.value = data['nama'];
+                controller.levelUser.value = data['level'];
+                if (data['level'] == 'admin') {
                   return const AdminView();
-                } else if (data == 'pengendara') {
+                } else if (data['level'] == 'pengendara') {
                   return const PengendaraView();
-                } else if (data == 'petugas') {
+                } else if (data['level'] == 'petugas') {
                   return const PetugasView();
                 }
               }
