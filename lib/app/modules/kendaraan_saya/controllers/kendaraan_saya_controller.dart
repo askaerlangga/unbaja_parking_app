@@ -22,4 +22,11 @@ class KendaraanSayaController extends GetxController {
     var dataKendaraan = db.collection('vehicles').doc(idKendaraan).snapshots();
     return dataKendaraan;
   }
+
+  void hapusKendaraan(String uid, String idKendaraan) {
+    var userData = db.collection('users').doc(uid);
+    userData.update({
+      'kendaraan': FieldValue.arrayRemove([idKendaraan])
+    });
+  }
 }

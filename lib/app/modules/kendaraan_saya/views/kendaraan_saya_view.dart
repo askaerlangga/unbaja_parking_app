@@ -70,14 +70,19 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
                                             ],
                                           ),
                                         ),
-                                        Spacer(
+                                        const Spacer(
                                           flex: 1,
                                         ),
                                         IconButton(
                                             onPressed: () {},
                                             icon: Icon(Icons.edit)),
+                                        const SizedBox(width: 10),
                                         IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              controller.hapusKendaraan(
+                                                  Get.arguments,
+                                                  listKendaraan[index]);
+                                            },
                                             icon: Icon(Icons.delete)),
                                       ]),
                                     ),
@@ -96,61 +101,6 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
                 );
               }),
         ),
-
-        // Padding(
-        //   padding: const EdgeInsets.fromLTRB(20, 100, 20, 20),
-        //   child: FutureBuilder(
-        //       future: controller.getListKendaraan(Get.arguments),
-        //       builder: (context, snapshot) {
-        //         if (snapshot.data != null) {
-        //           var listKendaraan = snapshot.data as List;
-        //           return ListView.builder(
-        //               itemCount: listKendaraan.length,
-        //               itemBuilder: (context, index) {
-        //                 return Card(
-        //                   margin: const EdgeInsets.only(bottom: 10),
-        //                   child: SizedBox(
-        //                     height: 80,
-        //                     child: Row(children: [
-        //                       Padding(
-        //                         padding: const EdgeInsets.only(left: 10),
-        //                         child: Column(
-        //                           mainAxisAlignment: MainAxisAlignment.center,
-        //                           crossAxisAlignment: CrossAxisAlignment.start,
-        //                           children: <Widget>[
-        //                             Text(
-        //                               '${listKendaraan[index]}',
-        //                               overflow: TextOverflow.ellipsis,
-        //                               maxLines: 1,
-        //                               style: const TextStyle(
-        //                                   fontSize: 20,
-        //                                   fontWeight: FontWeight.bold),
-        //                             ),
-        //                             Text(
-        //                               'Merek Kendaraan',
-        //                               overflow: TextOverflow.ellipsis,
-        //                               maxLines: 1,
-        //                             )
-        //                           ],
-        //                         ),
-        //                       ),
-        //                       Spacer(
-        //                         flex: 1,
-        //                       ),
-        //                       IconButton(
-        //                           onPressed: () {}, icon: Icon(Icons.edit)),
-        //                       IconButton(
-        //                           onPressed: () {}, icon: Icon(Icons.delete)),
-        //                     ]),
-        //                   ),
-        //                 );
-        //               });
-        //         }
-
-        //         return Center(child: Text("Tidak ada data"));
-        //       }),
-        // ),
-
         Padding(
           padding: const EdgeInsets.all(20),
           child: CustomButton(
