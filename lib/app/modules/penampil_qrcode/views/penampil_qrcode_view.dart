@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 
 import '../controllers/penampil_qrcode_controller.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -53,7 +54,11 @@ class PenampilQrcodeView extends GetView<PenampilQrcodeController> {
                       height: 10,
                     ),
                     ElevatedButton(
-                        onPressed: () {}, child: Text('Kendaraan Saya'))
+                        onPressed: () {
+                          Get.toNamed(Routes.KENDARAAN_SAYA,
+                              arguments: Get.arguments);
+                        },
+                        child: const Text('Kendaraan Saya'))
                   ],
                 ),
               );
