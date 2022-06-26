@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 class QrcodeScannerController extends GetxController {
   //TODO: Implement QrcodeScannerController
 
+  var scanCode = ''.obs;
+
   final count = 0.obs;
   @override
   void onInit() {
