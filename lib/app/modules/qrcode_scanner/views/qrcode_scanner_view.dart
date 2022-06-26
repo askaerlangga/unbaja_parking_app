@@ -9,7 +9,6 @@ class QrcodeScannerView extends GetView<QrcodeScannerController> {
   const QrcodeScannerView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var scanCode = '';
     return Scaffold(
       appBar: AppBar(
         title: const Text('QR Code Scanner'),
@@ -21,6 +20,7 @@ class QrcodeScannerView extends GetView<QrcodeScannerController> {
             child: Stack(
               children: <Widget>[
                 MobileScanner(
+                    controller: controller.cameraController,
                     allowDuplicates: false,
                     onDetect: (barcode, args) {
                       if (barcode.rawValue == null) {
@@ -31,6 +31,41 @@ class QrcodeScannerView extends GetView<QrcodeScannerController> {
                         debugPrint('Barcode found! $code');
                       }
                     }),
+                // Container(
+                //   width: 100,
+                //   height: 100,
+                //   decoration:
+                //       BoxDecoration(color: Color.fromARGB(20, 255, 255, 255)),
+                // ),
+                Align(
+                  alignment: const Alignment(0, 0.9),
+                  child: SizedBox(
+                      height: 60,
+                      width: 60,
+                      child: MaterialButton(
+                        onPressed: () {
+                          controller.cameraController.toggleTorch();
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
+                        color: Colors.blue,
+                        child: ValueListenableBuilder(
+                          valueListenable:
+                              controller.cameraController.torchState,
+                          builder: (context, state, child) {
+                            return ((state as TorchState) == TorchState.off)
+                                ? const Icon(
+                                    Icons.flashlight_off,
+                                    color: Colors.white,
+                                  )
+                                : const Icon(
+                                    Icons.flashlight_on,
+                                    color: Colors.white,
+                                  );
+                          },
+                        ),
+                      )),
+                )
               ],
             )),
         Flexible(
@@ -41,35 +76,6 @@ class QrcodeScannerView extends GetView<QrcodeScannerController> {
                     () => Text('${controller.scanCode.value}'),
                   ),
                 ))),
-        // Container(
-        //   height: Get.height * 0.3,
-        //   color: Colors.blue,
-        // ),
-        // Stack(
-        //   children: [
-        //     SizedBox(
-        //       height: Get.height * 0.3,
-        //     ),
-        //     Container(color: Colors.red),
-        //   ],
-        // )
-        // SizedBox(
-        //     height: Get.height * 0.7,
-        //     child: Stack(
-        //       children: [
-        //
-        //       ],
-        //     )),
-        // SizedBox(
-        //   height: Get.height * 0.2,
-        //   child: Stack(
-        //     fit: StackFit.expand,
-        //     children: [
-
-        //       )
-        //     ],
-        //   ),
-        // )
       ]),
     );
   }

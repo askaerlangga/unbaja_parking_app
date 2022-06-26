@@ -1,25 +1,7 @@
 import 'package:get/get.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QrcodeScannerController extends GetxController {
-  //TODO: Implement QrcodeScannerController
-
+  MobileScannerController cameraController = MobileScannerController();
   var scanCode = ''.obs;
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }
