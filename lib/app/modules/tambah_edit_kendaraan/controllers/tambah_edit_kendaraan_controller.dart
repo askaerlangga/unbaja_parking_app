@@ -10,6 +10,14 @@ class TambahEditKendaraanController extends GetxController {
   String? dropdownValue;
   List<String> dropdownItems = ['Sepeda Motor', 'Mobil'];
 
+  Future<Map<String, dynamic>> getUserData(String uid) {
+    var userData = db.collection('users').doc(uid).get().then((value) {
+      var data = value.data() as Map<String, dynamic>;
+      return data;
+    });
+    return userData;
+  }
+
   void tambahKendaraan(
       String uid, String jenisKendaraan, String merek, String nomorPlat) async {
     String? idKendaraan;
@@ -22,9 +30,20 @@ class TambahEditKendaraanController extends GetxController {
         idKendaraan = value.id;
       });
 
-      db.collection('users').doc(uid).update({
-        'kendaraan': FieldValue.arrayUnion([idKendaraan]),
+      var check = db.collection('users').doc(uid).get().then((value) {
+        var data = (value.data() as Map<String, dynamic>)['kendaraan'];
+        return data;
       });
+
+      if (check != null) {
+        db.collection('users').doc(uid).update({
+          'kendaraan': FieldValue.arrayUnion([idKendaraan]),
+        });
+      } else {
+        db.collection('users').doc(uid).set({
+          'kendaraan': [idKendaraan]
+        });
+      }
     } catch (e) {
       print(e);
     }
