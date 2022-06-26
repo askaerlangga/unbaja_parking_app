@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 class KendaraanSayaController extends GetxController {
   final db = FirebaseFirestore.instance;
+  var uid;
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUserData(String uid) {
     var userData = db.collection('users').doc(uid).snapshots();
@@ -28,5 +29,18 @@ class KendaraanSayaController extends GetxController {
     userData.update({
       'kendaraan': FieldValue.arrayRemove([idKendaraan])
     });
+  }
+
+  void setKendaraanUtama(String uid, String idKendaraan) {
+    var docRef = db.collection('users').doc(uid);
+    var kendaraan = docRef.get().then((value) {
+      var data = (value.data() as Map<String, dynamic>)['kendaraan_utama'];
+      return data;
+    });
+    if (kendaraan != null) {
+      docRef.update({'kendaraan_utama': idKendaraan});
+    } else {
+      docRef.set({'kendaraan_utama': idKendaraan});
+    }
   }
 }

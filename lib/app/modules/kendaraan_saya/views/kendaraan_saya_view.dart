@@ -11,6 +11,7 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
   const KendaraanSayaView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    controller.uid = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Kendaraan Saya'),
@@ -24,8 +25,8 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.active &&
                     snapshot.data != null) {
-                  var listKendaraan = (snapshot.data?.data()
-                      as Map<String, dynamic>)['kendaraan'];
+                  var userData = snapshot.data?.data() as Map<String, dynamic>;
+                  var listKendaraan = userData['kendaraan'];
                   if (listKendaraan != null) {
                     print(listKendaraan);
                     return ListView.builder(
@@ -73,6 +74,33 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
                                         const Spacer(
                                           flex: 1,
                                         ),
+                                        IconButton(
+                                            onPressed: () {
+                                              Get.defaultDialog(
+                                                  title: 'Kendaraan Utama',
+                                                  middleText:
+                                                      'Jadikan kendaraan ini kendaraan utama?',
+                                                  onCancel: () => Get.back(),
+                                                  onConfirm: () {
+                                                    controller
+                                                        .setKendaraanUtama(
+                                                            controller.uid,
+                                                            listKendaraan[
+                                                                index]);
+                                                    Get.back();
+                                                    Get.defaultDialog(
+                                                        title:
+                                                            'Berhasil Mengubah',
+                                                        middleText:
+                                                            'Kendaraan ini sekarang menjadi kendaraan utama');
+                                                  });
+                                            },
+                                            icon:
+                                                (userData['kendaraan_utama'] ==
+                                                        listKendaraan[index])
+                                                    ? Icon(Icons.star)
+                                                    : Icon(Icons.star_border)),
+                                        const SizedBox(width: 10),
                                         IconButton(
                                             onPressed: () {},
                                             icon: Icon(Icons.edit)),
