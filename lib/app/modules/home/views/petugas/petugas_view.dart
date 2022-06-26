@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:unbaja_parking_app/app/modules/home/controllers/home_controller.dart';
-import 'package:unbaja_parking_app/app/modules/home/views/widgets/menu_button.dart';
-import 'package:unbaja_parking_app/app/modules/home/views/widgets/user_info_panel.dart';
 import 'package:unbaja_parking_app/app/routes/app_pages.dart';
+import 'package:unbaja_parking_app/app/widgets/menu_button.dart';
+import 'package:unbaja_parking_app/app/widgets/user_info_panel.dart';
 
-class AdminView extends GetView<HomeController> {
-  const AdminView({Key? key}) : super(key: key);
-
+class PetugasView extends GetView<HomeController> {
+  const PetugasView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,14 +35,18 @@ class AdminView extends GetView<HomeController> {
           child: Column(
             children: <Widget>[
               MenuButton(
-                  label: 'Data Pengguna',
-                  icon: Icons.person,
+                  label: 'QR Code Scanner',
+                  icon: Icons.qr_code,
                   onPressed: () {
-                    Get.toNamed(Routes.MENU_DATA_PENGGUNA);
+                    Get.toNamed(Routes.QRCODE_SCANNER);
                   }),
               MenuButton(
-                  label: 'Data Kendaraan',
+                  label: 'Pengendara Umum / Tamu',
                   icon: Icons.directions_car,
+                  onPressed: () {}),
+              MenuButton(
+                  label: 'Kendaraan Terparkir',
+                  icon: Icons.local_parking,
                   onPressed: () {}),
               MenuButton(label: 'Laporan', icon: Icons.print, onPressed: () {}),
             ],
