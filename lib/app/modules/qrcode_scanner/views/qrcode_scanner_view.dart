@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 
 import '../controllers/qrcode_scanner_controller.dart';
@@ -18,13 +19,14 @@ class QrcodeScannerView extends GetView<QrcodeScannerController> {
       body: Stack(alignment: Alignment.bottomCenter, children: [
         MobileScanner(
             controller: controller.cameraController,
-            allowDuplicates: false,
+            allowDuplicates: true,
             onDetect: (barcode, args) {
               if (barcode.rawValue == null) {
                 debugPrint('Failed to scan Barcode');
               } else {
                 final String code = barcode.rawValue!;
-                controller.scanCode.value = code;
+                Get.toNamed(Routes.SCANNER_DETAIL_PENGENDARA,
+                    arguments: [code, Get.arguments]);
                 debugPrint('Barcode found! $code');
               }
             }),
