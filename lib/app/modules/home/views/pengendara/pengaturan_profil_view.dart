@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:unbaja_parking_app/app/modules/home/controllers/home_controller.dart';
 import 'package:unbaja_parking_app/app/modules/home/widgets/container_pengaturan_profil.dart';
 import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/container_detail_pengendara_widget.dart';
+import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 
 class PengaturanProfilView extends GetView<HomeController> {
@@ -65,7 +66,19 @@ class PengaturanProfilView extends GetView<HomeController> {
                         height: 20,
                       ),
                       CustomButton(
-                          label: 'Ubah Data Pengguna', onPressed: () {}),
+                          label: 'Ubah Data Pengguna',
+                          onPressed: () {
+                            Get.toNamed(Routes.EDIT_DATA_PENGENDARA,
+                                arguments: [
+                                  'Ubah Data Pengguna',
+                                  controller.uid,
+                                  userData['nama'],
+                                  userData['alamat'],
+                                  userData['nomor_telepon'],
+                                  userData['nomor_identitas'],
+                                  userData['status']
+                                ]);
+                          }),
                       const SizedBox(
                         height: 10,
                       ),
