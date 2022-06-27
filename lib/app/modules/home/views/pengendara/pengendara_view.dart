@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:unbaja_parking_app/app/controllers/auth_controller.dart';
 import 'package:unbaja_parking_app/app/modules/home/controllers/home_controller.dart';
 import 'package:unbaja_parking_app/app/routes/app_pages.dart';
+import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 import 'package:unbaja_parking_app/app/widgets/menu_button.dart';
 import 'package:unbaja_parking_app/app/widgets/user_info_panel.dart';
 
@@ -24,41 +25,84 @@ class PengendaraView extends GetView<HomeController> {
               icon: const Icon(Icons.logout))
         ],
       ),
-      body: ListView(children: <Widget>[
-        UserInfoPanel(
-          nameUser: controller.nameUser.value,
-          levelUser: controller.levelUser.value,
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Container(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-          child: Column(
-            children: <Widget>[
-              MenuButton(
-                  label: 'Tampil QR Code',
-                  icon: Icons.qr_code,
-                  onPressed: () {
-                    Get.toNamed(Routes.PENAMPIL_QRCODE, arguments: auth.uid);
-                  }),
-              MenuButton(
-                  label: 'Kendaraan Saya',
-                  icon: Icons.directions_car,
-                  onPressed: () {
-                    Get.toNamed(Routes.KENDARAAN_SAYA, arguments: auth.uid);
-                  }),
-              MenuButton(
-                  label: 'Pengaturan Profil',
-                  icon: Icons.person,
-                  onPressed: () {
-                    Get.toNamed(Routes.PENGATURAN_PROFIL,
-                        arguments: 'Pengaturan Profil');
-                  }),
-            ],
-          ),
-        ),
-      ]),
+      body: FutureBuilder(
+          future: Future.delayed(Duration.zero),
+          builder: (context, _) {
+            if (controller.nameUser.value == '') {
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Selamat Datang',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        'Anda diharuskan mengisi beberapa informasi sebelum menggunakan aplikasi ini',
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      CustomButton(
+                          label: 'LANJUTKAN',
+                          onPressed: () {
+                            Get.toNamed(Routes.EDIT_DATA_PENGENDARA,
+                                arguments: [
+                                  'ISI DATA PENGGUNA',
+                                  controller.uid,
+                                  null
+                                ]);
+                          }),
+                    ],
+                  ),
+                ),
+              );
+            }
+            return ListView(children: <Widget>[
+              UserInfoPanel(
+                nameUser: controller.nameUser.value,
+                levelUser: controller.levelUser.value,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                child: Column(
+                  children: <Widget>[
+                    MenuButton(
+                        label: 'Tampil QR Code',
+                        icon: Icons.qr_code,
+                        onPressed: () {
+                          Get.toNamed(Routes.PENAMPIL_QRCODE,
+                              arguments: auth.uid);
+                        }),
+                    MenuButton(
+                        label: 'Kendaraan Saya',
+                        icon: Icons.directions_car,
+                        onPressed: () {
+                          Get.toNamed(Routes.KENDARAAN_SAYA,
+                              arguments: auth.uid);
+                        }),
+                    MenuButton(
+                        label: 'Pengaturan Profil',
+                        icon: Icons.person,
+                        onPressed: () {
+                          Get.toNamed(Routes.PENGATURAN_PROFIL,
+                              arguments: 'Pengaturan Profil');
+                        }),
+                  ],
+                ),
+              ),
+            ]);
+          }),
     );
   }
 }

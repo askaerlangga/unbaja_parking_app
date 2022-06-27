@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class EditDataPengendaraController extends GetxController {
@@ -10,6 +9,9 @@ class EditDataPengendaraController extends GetxController {
   TextEditingController nomorTelepon = TextEditingController();
   TextEditingController nomorIdentitas = TextEditingController();
   TextEditingController status = TextEditingController();
+
+  String? dropdownValue;
+  List<String> dropdownItems = ['Mahasiswa', 'Dosen', 'Pegawai'];
 
   void editDataPengendara(String uid, String nama, String alamat,
       String nomorTelepon, String nomorIdentitas, String status) {

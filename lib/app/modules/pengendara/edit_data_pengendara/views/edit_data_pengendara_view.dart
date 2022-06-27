@@ -10,12 +10,18 @@ class EditDataPengendaraView extends GetView<EditDataPengendaraController> {
   const EditDataPengendaraView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    controller.nama.text = Get.arguments[2];
-    controller.alamat.text = Get.arguments[3];
-    controller.nomorTelepon.text = Get.arguments[4];
-    controller.nomorIdentitas.text = Get.arguments[5];
-    controller.status.text = Get.arguments[6];
+    if (Get.arguments[2] != null) {
+      controller.nama.text = Get.arguments[2];
+      controller.alamat.text = Get.arguments[3];
+      controller.nomorTelepon.text = Get.arguments[4];
+      controller.nomorIdentitas.text = Get.arguments[5];
+      controller.status.text = Get.arguments[6];
+    }
 
+    controller.alamat.text = '';
+    controller.nomorTelepon.text = '';
+    controller.nomorIdentitas.text = '';
+    controller.status.text = '';
     return Scaffold(
       appBar: AppBar(
         title: Text(Get.arguments[0]),
@@ -31,18 +37,42 @@ class EditDataPengendaraView extends GetView<EditDataPengendaraController> {
           CustomTextField(
             controller: controller.nomorIdentitas,
             labelText: 'Nomor Identitas',
-            enable: false,
+            enable: (Get.arguments[2] == null) ? true : false,
           ),
-          CustomTextField(
-            controller: controller.status,
-            labelText: 'Status',
-            enable: false,
-          ),
+          FutureBuilder(
+              future: Future.delayed(Duration.zero),
+              builder: (context, _) {
+                if (Get.arguments[2] == null) {
+                  return SizedBox(
+                    width: Get.width,
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButtonFormField<String>(
+                          hint: const Text('Status'),
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder()),
+                          value: controller.dropdownValue,
+                          items: controller.dropdownItems
+                              .map<DropdownMenuItem<String>>((value) {
+                            return DropdownMenuItem<String>(
+                                value: value, child: Text(value));
+                          }).toList(),
+                          onChanged: (String? value) {
+                            controller.dropdownValue = value!;
+                          }),
+                    ),
+                  );
+                }
+                return CustomTextField(
+                  controller: controller.nomorIdentitas,
+                  labelText: 'Nomor Identitas',
+                  enable: false,
+                );
+              }),
           const SizedBox(
             height: 20,
           ),
           CustomButton(
-              label: Get.arguments[0],
+              label: 'SELESAI',
               onPressed: () {
                 controller.editDataPengendara(
                     Get.arguments[1],
@@ -50,7 +80,9 @@ class EditDataPengendaraView extends GetView<EditDataPengendaraController> {
                     controller.alamat.text,
                     controller.nomorTelepon.text,
                     controller.nomorIdentitas.text,
-                    controller.status.text);
+                    (controller.status.text == '')
+                        ? controller.dropdownValue.toString()
+                        : controller.status.text);
               })
         ],
       ),

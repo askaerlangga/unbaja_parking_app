@@ -32,7 +32,7 @@ class HomeController extends GetxController {
         onConfirm: () async {
           await FirebaseAuth.instance.signOut();
           var auth = Get.find<AuthController>();
-          auth.uid = '';
+          auth.uid.value = '';
           Get.offAllNamed(Routes.LOGIN);
         });
   }

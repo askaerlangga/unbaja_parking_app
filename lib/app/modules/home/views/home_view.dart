@@ -7,6 +7,7 @@ import 'package:unbaja_parking_app/app/modules/home/views/admin/admin_view.dart'
 import 'package:unbaja_parking_app/app/modules/home/views/pengendara/pengendara_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:unbaja_parking_app/app/modules/home/views/petugas/petugas_view.dart';
+import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
@@ -14,18 +15,18 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      controller.uid = auth.uid;
+      controller.uid = auth.uid.value;
       if (controller.uid != '') {
         return FutureBuilder<DocumentSnapshot<Object?>>(
             future: controller.userLevelCheck(
-                (Get.arguments == null) ? controller.uid : Get.arguments),
+                (Get.arguments == null) ? auth.uid.value : Get.arguments),
             builder: (context, snapshot) {
               // Cek user level
               if (snapshot.connectionState == ConnectionState.done) {
                 var data = (snapshot.data!.data() as Map<String, dynamic>);
                 print('PRINT SNAPSHOT ${data}');
-                controller.nameUser.value = data['nama'];
-                controller.levelUser.value = data['level'];
+                controller.nameUser.value = data['nama'] ?? '';
+                controller.levelUser.value = data['level'] ?? '';
                 if (data['level'] == 'admin') {
                   return const AdminView();
                 } else if (data['level'] == 'pengendara') {
