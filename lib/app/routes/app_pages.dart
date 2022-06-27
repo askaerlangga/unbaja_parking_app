@@ -4,7 +4,7 @@ import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/home/views/menu_data_pengguna_view.dart';
+import '../modules/home/views/admin/menu_data_pengguna_view.dart';
 import '../modules/kendaraan_saya/bindings/kendaraan_saya_binding.dart';
 import '../modules/kendaraan_saya/views/kendaraan_saya_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -17,6 +17,7 @@ import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/tambah_edit_kendaraan/bindings/tambah_edit_kendaraan_binding.dart';
 import '../modules/tambah_edit_kendaraan/views/tambah_edit_kendaraan_view.dart';
+import '../modules/qrcode_scanner/views/scanner_detail_pengendara_view.dart';
 
 part 'app_routes.dart';
 
@@ -69,6 +70,11 @@ class AppPages {
       name: _Paths.TAMBAH_EDIT_KENDARAAN,
       page: () => const TambahEditKendaraanView(),
       binding: TambahKendaraanBinding(),
+    ),
+    GetPage(
+      name: _Paths.SCANNER_DETAIL_PENGENDARA,
+      page: () => const ScannerDetailPengendaraView(),
+      binding: QrcodeScannerBinding(),
     ),
   ];
 }

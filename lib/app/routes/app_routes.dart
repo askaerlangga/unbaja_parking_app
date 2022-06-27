@@ -12,6 +12,7 @@ abstract class Routes {
   static const PENAMPIL_QRCODE = _Paths.PENAMPIL_QRCODE;
   static const KENDARAAN_SAYA = _Paths.KENDARAAN_SAYA;
   static const TAMBAH_EDIT_KENDARAAN = _Paths.TAMBAH_EDIT_KENDARAAN;
+  static const SCANNER_DETAIL_PENGENDARA = _Paths.SCANNER_DETAIL_PENGENDARA;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const PENAMPIL_QRCODE = '/penampil-qrcode';
   static const KENDARAAN_SAYA = '/kendaraan-saya';
   static const TAMBAH_EDIT_KENDARAAN = '/tambah-edit-kendaraan';
+  static const SCANNER_DETAIL_PENGENDARA = '/scanner-detail-pengendara';
 }

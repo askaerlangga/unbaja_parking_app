@@ -25,7 +25,8 @@ class TambahEditKendaraanController extends GetxController {
       await db.collection('vehicles').add({
         'jenis_kendaraan': jenisKendaraan,
         'merek_kendaraan': merek,
-        'nomor_plat': nomorPlat.toUpperCase()
+        'nomor_plat': nomorPlat.toUpperCase(),
+        'pemilik': uid
       }).then((value) {
         idKendaraan = value.id;
       });
