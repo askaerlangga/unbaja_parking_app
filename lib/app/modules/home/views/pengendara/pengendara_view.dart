@@ -40,15 +40,13 @@ class PengendaraView extends GetView<HomeController> {
                   label: 'Tampil QR Code',
                   icon: Icons.qr_code,
                   onPressed: () {
-                    Get.toNamed(Routes.PENAMPIL_QRCODE,
-                        arguments: auth.uid.value);
+                    Get.toNamed(Routes.PENAMPIL_QRCODE, arguments: auth.uid);
                   }),
               MenuButton(
                   label: 'Kendaraan Saya',
                   icon: Icons.directions_car,
                   onPressed: () {
-                    Get.toNamed(Routes.KENDARAAN_SAYA,
-                        arguments: auth.uid.value);
+                    Get.toNamed(Routes.KENDARAAN_SAYA, arguments: auth.uid);
                   }),
               MenuButton(
                   label: 'Pengaturan Profil',

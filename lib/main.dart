@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           if (snapshot.data != null &&
               (snapshot.data as User).emailVerified != false) {
             User user = snapshot.data as User;
-            authController.uid.value = user.uid;
+            authController.uid = user.uid;
             return GetMaterialApp(
               title: 'UNBAJA Parking',
 

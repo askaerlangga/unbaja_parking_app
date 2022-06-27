@@ -5,6 +5,7 @@ import 'package:unbaja_parking_app/app/controllers/auth_controller.dart';
 import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 
 class HomeController extends GetxController {
+  var uid = '';
   var nameUser = ''.obs;
   var levelUser = ''.obs;
 
@@ -26,7 +27,7 @@ class HomeController extends GetxController {
         onConfirm: () async {
           await FirebaseAuth.instance.signOut();
           var auth = Get.find<AuthController>();
-          auth.uid.value = '';
+          auth.uid = '';
           Get.offAllNamed(Routes.LOGIN);
         });
   }

@@ -1,23 +1,23 @@
 import 'package:get/get.dart';
+import 'package:unbaja_parking_app/app/modules/pengendara/kendaraan_saya/bindings/kendaraan_saya_binding.dart';
+import 'package:unbaja_parking_app/app/modules/pengendara/kendaraan_saya/views/kendaraan_saya_view.dart';
+import 'package:unbaja_parking_app/app/modules/pengendara/penampil_qrcode/bindings/penampil_qrcode_binding.dart';
+import 'package:unbaja_parking_app/app/modules/pengendara/penampil_qrcode/views/penampil_qrcode_view.dart';
+import 'package:unbaja_parking_app/app/modules/pengendara/tambah_edit_kendaraan/bindings/tambah_edit_kendaraan_binding.dart';
+import 'package:unbaja_parking_app/app/modules/pengendara/tambah_edit_kendaraan/views/tambah_edit_kendaraan_view.dart';
+import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/bindings/qrcode_scanner_binding.dart';
+import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/views/qrcode_scanner_view.dart';
+import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/views/scanner_detail_pengendara_view.dart';
 
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/home/views/admin/menu_data_pengguna_view.dart';
-import '../modules/kendaraan_saya/bindings/kendaraan_saya_binding.dart';
-import '../modules/kendaraan_saya/views/kendaraan_saya_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
-import '../modules/penampil_qrcode/bindings/penampil_qrcode_binding.dart';
-import '../modules/penampil_qrcode/views/penampil_qrcode_view.dart';
-import '../modules/qrcode_scanner/bindings/qrcode_scanner_binding.dart';
-import '../modules/qrcode_scanner/views/qrcode_scanner_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
-import '../modules/tambah_edit_kendaraan/bindings/tambah_edit_kendaraan_binding.dart';
-import '../modules/tambah_edit_kendaraan/views/tambah_edit_kendaraan_view.dart';
-import '../modules/qrcode_scanner/views/scanner_detail_pengendara_view.dart';
 
 part 'app_routes.dart';
 

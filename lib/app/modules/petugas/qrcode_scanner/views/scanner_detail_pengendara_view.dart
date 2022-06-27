@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:unbaja_parking_app/app/modules/qrcode_scanner/container_detail_pengendara_widget.dart';
-import 'package:unbaja_parking_app/app/modules/qrcode_scanner/controllers/qrcode_scanner_controller.dart';
+import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/container_detail_pengendara_widget.dart';
+import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/controllers/qrcode_scanner_controller.dart';
 
 class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
   const ScannerDetailPengendaraView({Key? key}) : super(key: key);

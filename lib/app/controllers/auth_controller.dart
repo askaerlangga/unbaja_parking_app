@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class AuthController extends GetxController {
   // UserUID untuk initialRoute
-  var uid = ''.obs;
+  var uid = '';
 
   // Cek status Auth (Apakah user Masuk atau Keluar)
   Stream<User?> authStatus() {

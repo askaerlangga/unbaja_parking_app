@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class MenuButton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final String label;
-  final IconData icon;
+  final IconData? icon;
   final VoidCallback onPressed;
 
-  const MenuButton(
+  const CustomButton(
       {required String this.label,
-      required IconData this.icon,
+      this.icon,
       required this.onPressed,
       Key? key})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.only(top: 10),
         width: MediaQuery.of(context).size.width,
         height: 60,
         child: MaterialButton(
