@@ -41,7 +41,17 @@ class EditDataPengendaraView extends GetView<EditDataPengendaraController> {
           const SizedBox(
             height: 20,
           ),
-          CustomButton(label: Get.arguments[0], onPressed: () {})
+          CustomButton(
+              label: Get.arguments[0],
+              onPressed: () {
+                controller.editDataPengendara(
+                    Get.arguments[1],
+                    controller.nama.text,
+                    controller.alamat.text,
+                    controller.nomorTelepon.text,
+                    controller.nomorIdentitas.text,
+                    controller.status.text);
+              })
         ],
       ),
     );
