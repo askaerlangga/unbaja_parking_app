@@ -51,7 +51,10 @@ class PengendaraView extends GetView<HomeController> {
               MenuButton(
                   label: 'Pengaturan Profil',
                   icon: Icons.person,
-                  onPressed: () {}),
+                  onPressed: () {
+                    Get.toNamed(Routes.PENGATURAN_PROFIL,
+                        arguments: 'Pengaturan Profil');
+                  }),
             ],
           ),
         ),

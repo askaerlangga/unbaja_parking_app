@@ -5,15 +5,20 @@ import 'package:unbaja_parking_app/app/controllers/auth_controller.dart';
 import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 
 class HomeController extends GetxController {
+  var db = FirebaseFirestore.instance;
   var uid = '';
   var nameUser = ''.obs;
   var levelUser = ''.obs;
 
   // Fungsi cek user level
   Future<DocumentSnapshot<Object?>> userLevelCheck(String uid) {
-    var db = FirebaseFirestore.instance;
     DocumentReference user = db.collection("users").doc(uid);
     return user.get();
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getUserData(String uid) {
+    var userData = db.collection('users').doc(uid);
+    return userData.snapshots();
   }
 
   // Fungsi Logout
