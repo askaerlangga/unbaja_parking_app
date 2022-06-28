@@ -45,6 +45,12 @@ class TambahEditKendaraanController extends GetxController {
           'kendaraan': [idKendaraan]
         });
       }
+      Get.defaultDialog(
+          middleText: 'Berhasil Menambah kendaraan',
+          textCancel: 'Ok',
+          onCancel: () {
+            Get.back();
+          });
     } catch (e) {
       print(e);
     }

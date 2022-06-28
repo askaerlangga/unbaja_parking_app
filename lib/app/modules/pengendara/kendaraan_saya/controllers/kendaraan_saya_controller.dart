@@ -26,9 +26,19 @@ class KendaraanSayaController extends GetxController {
 
   void hapusKendaraan(String uid, String idKendaraan) {
     var userData = db.collection('users').doc(uid);
-    userData.update({
-      'kendaraan': FieldValue.arrayRemove([idKendaraan])
-    });
+    Get.defaultDialog(
+        title: 'Hapus Kendaraan',
+        middleText: 'Anda yakin ingin menghapus kendaraan ini?',
+        textCancel: 'Batal',
+        textConfirm: 'Hapus',
+        onConfirm: () {
+          userData.update({
+            'kendaraan': FieldValue.arrayRemove([idKendaraan])
+          });
+          Get.back();
+          Get.defaultDialog(
+              middleText: 'Kendaraan berhasil dihapus', textCancel: 'Ok');
+        });
   }
 
   void setKendaraanUtama(String uid, String idKendaraan) {
