@@ -82,7 +82,11 @@ class PengaturanProfilView extends GetView<HomeController> {
                       const SizedBox(
                         height: 10,
                       ),
-                      CustomButton(label: 'Ubah Password', onPressed: () {}),
+                      CustomButton(
+                          label: 'Ubah Password',
+                          onPressed: () {
+                            Get.toNamed(Routes.UBAH_PASSWORD_PENGENDARA);
+                          }),
                     ],
                   );
                 }
