@@ -10,9 +10,14 @@ class TambahEditKendaraanView extends GetView<TambahEditKendaraanController> {
   const TambahEditKendaraanView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    if (Get.arguments[1] == 'Ubah Kendaraan') {
+      controller.dropdownValue = Get.arguments[2];
+      controller.merek.text = Get.arguments[3];
+      controller.nomorPlat.text = Get.arguments[4];
+    }
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Tambah Kendaraan'),
+          title: Text(Get.arguments[1]),
           centerTitle: true,
         ),
         body: ListView(
@@ -65,13 +70,21 @@ class TambahEditKendaraanView extends GetView<TambahEditKendaraanController> {
               height: 20,
             ),
             CustomButton(
-                label: 'Tambah Kendaraan',
+                label: Get.arguments[1],
                 onPressed: () {
-                  controller.tambahKendaraan(
-                      Get.arguments,
-                      controller.dropdownValue!,
-                      controller.merek.text,
-                      controller.nomorPlat.text);
+                  if (Get.arguments[1] == 'Tambah Kendaraan') {
+                    controller.tambahKendaraan(
+                        Get.arguments,
+                        controller.dropdownValue!,
+                        controller.merek.text,
+                        controller.nomorPlat.text);
+                  } else {
+                    controller.ubahKendaraan(
+                        Get.arguments[0],
+                        controller.dropdownValue!,
+                        controller.merek.text,
+                        controller.nomorPlat.text);
+                  }
                 })
           ],
         ));

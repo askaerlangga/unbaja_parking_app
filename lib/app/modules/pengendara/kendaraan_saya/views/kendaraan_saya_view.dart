@@ -32,6 +32,7 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
                     return ListView.builder(
                         itemCount: listKendaraan.length,
                         itemBuilder: (context, index) {
+                          print('PRINT INI ${listKendaraan[index]}');
                           return FutureBuilder<
                                   DocumentSnapshot<Map<String, dynamic>>>(
                               future: controller
@@ -102,7 +103,19 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
                                                     : Icon(Icons.star_border)),
                                         const SizedBox(width: 10),
                                         IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Get.toNamed(
+                                                  Routes.TAMBAH_EDIT_KENDARAAN,
+                                                  arguments: [
+                                                    listKendaraan[index],
+                                                    'Ubah Kendaraan',
+                                                    dataKendaraan[
+                                                        'jenis_kendaraan'],
+                                                    dataKendaraan[
+                                                        'merek_kendaraan'],
+                                                    dataKendaraan['nomor_plat']
+                                                  ]);
+                                            },
                                             icon: Icon(Icons.edit)),
                                         const SizedBox(width: 10),
                                         IconButton(
@@ -136,7 +149,7 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
               icon: Icons.add,
               onPressed: () {
                 Get.toNamed(Routes.TAMBAH_EDIT_KENDARAAN,
-                    arguments: Get.arguments);
+                    arguments: [Get.arguments, 'Tambah Kendaraan']);
               }),
         ),
       ]),
