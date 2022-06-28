@@ -5,6 +5,10 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QrcodeScannerController extends GetxController {
   var db = FirebaseFirestore.instance;
+  String? idPengendara;
+  String? idKendaraan;
+  String? idPetugas;
+
   MobileScannerController cameraController = MobileScannerController();
   var scanCode = ''.obs;
   TextEditingController nomorPlat = TextEditingController();
@@ -18,5 +22,16 @@ class QrcodeScannerController extends GetxController {
   Future<DocumentSnapshot<Map<String, dynamic>>> getDataPengendara(String uid) {
     var dataPengendara = db.collection('users').doc(uid);
     return dataPengendara.get();
+  }
+
+  void parkirMasuk() {
+    db.collection('parking').add({
+      'masuk': FieldValue.serverTimestamp(),
+      'kendaraan': idKendaraan,
+      'pengendara': idPengendara,
+      'petugas': idPetugas
+    });
+    Get.back();
+    Get.defaultDialog(middleText: 'Kendaraan Masuk');
   }
 }

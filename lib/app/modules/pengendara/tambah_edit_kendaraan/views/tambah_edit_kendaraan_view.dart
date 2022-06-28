@@ -74,7 +74,7 @@ class TambahEditKendaraanView extends GetView<TambahEditKendaraanController> {
                 onPressed: () {
                   if (Get.arguments[1] == 'Tambah Kendaraan') {
                     controller.tambahKendaraan(
-                        Get.arguments,
+                        Get.arguments[0],
                         controller.dropdownValue!,
                         controller.merek.text,
                         controller.nomorPlat.text);

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/container_detail_pengendara_widget.dart';
 import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/controllers/qrcode_scanner_controller.dart';
+import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 
 class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
   const ScannerDetailPengendaraView({Key? key}) : super(key: key);
@@ -20,6 +21,9 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
           if (snapshot.connectionState == ConnectionState.done &&
               snapshot.data?.data() != null) {
             var dataKendaraan = snapshot.data!.data() as Map<String, dynamic>;
+            controller.idKendaraan = Get.arguments[0];
+            controller.idPengendara = dataKendaraan['pemilik'];
+            controller.idPetugas = Get.arguments[1];
             return ListView(
               padding: const EdgeInsets.all(20),
               children: [
@@ -46,6 +50,14 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
                               middleText: userData['nama']);
                         }
                         return const Text('');
+                      }),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomButton(
+                      label: 'PROSES',
+                      onPressed: () {
+                        controller.parkirMasuk();
                       })
                 ])
               ],
