@@ -48,7 +48,9 @@ class PetugasView extends GetView<HomeController> {
               MenuButton(
                   label: 'Kendaraan Terparkir',
                   icon: Icons.local_parking,
-                  onPressed: () {}),
+                  onPressed: () {
+                    Get.toNamed(Routes.KENDARAAN_TERPARKIR);
+                  }),
               MenuButton(label: 'Laporan', icon: Icons.print, onPressed: () {}),
             ],
           ),

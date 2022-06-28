@@ -1,11 +1,12 @@
 import 'package:get/get.dart';
-import 'package:unbaja_parking_app/app/modules/home/views/pengendara/pengaturan_profil_view.dart';
+import 'package:unbaja_parking_app/app/modules/petugas/kendaraan_terparkir/views/detail_kendaraan_terparkir_view.dart';
 
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/admin/menu_data_pengguna_view.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/home/views/pengendara/pengaturan_profil_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/pengendara/edit_data_pengendara/bindings/edit_data_pengendara_binding.dart';
@@ -18,6 +19,8 @@ import '../modules/pengendara/tambah_edit_kendaraan/bindings/tambah_edit_kendara
 import '../modules/pengendara/tambah_edit_kendaraan/views/tambah_edit_kendaraan_view.dart';
 import '../modules/pengendara/ubah_password_pengendara/bindings/ubah_password_pengendara_binding.dart';
 import '../modules/pengendara/ubah_password_pengendara/views/ubah_password_pengendara_view.dart';
+import '../modules/petugas/kendaraan_terparkir/bindings/kendaraan_terparkir_binding.dart';
+import '../modules/petugas/kendaraan_terparkir/views/kendaraan_terparkir_view.dart';
 import '../modules/petugas/qrcode_scanner/bindings/qrcode_scanner_binding.dart';
 import '../modules/petugas/qrcode_scanner/views/qrcode_scanner_view.dart';
 import '../modules/petugas/qrcode_scanner/views/scanner_detail_pengendara_view.dart';
@@ -95,6 +98,16 @@ class AppPages {
       name: _Paths.PENGATURAN_PROFIL,
       page: () => const PengaturanProfilView(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.KENDARAAN_TERPARKIR,
+      page: () => const KendaraanTerparkirView(),
+      binding: KendaraanTerparkirBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_KENDARAAN_TERPARKIR,
+      page: () => const DetailKendaraanTerparkirView(),
+      binding: KendaraanTerparkirBinding(),
     ),
   ];
 }

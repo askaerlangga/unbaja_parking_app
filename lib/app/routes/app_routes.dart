@@ -16,6 +16,8 @@ abstract class Routes {
   static const UBAH_PASSWORD_PENGENDARA = _Paths.UBAH_PASSWORD_PENGENDARA;
   static const EDIT_DATA_PENGENDARA = _Paths.EDIT_DATA_PENGENDARA;
   static const PENGATURAN_PROFIL = _Paths.PENGATURAN_PROFIL;
+  static const KENDARAAN_TERPARKIR = _Paths.KENDARAAN_TERPARKIR;
+  static const DETAIL_KENDARAAN_TERPARKIR = _Paths.DETAIL_KENDARAAN_TERPARKIR;
 }
 
 abstract class _Paths {
@@ -33,4 +35,6 @@ abstract class _Paths {
   static const UBAH_PASSWORD_PENGENDARA = '/ubah-password-pengendara';
   static const EDIT_DATA_PENGENDARA = '/edit-data-pengendara';
   static const PENGATURAN_PROFIL = '/pengaturan-profil';
+  static const KENDARAAN_TERPARKIR = '/kendaraan-terparkir';
+  static const DETAIL_KENDARAAN_TERPARKIR = '/detail-kendaraan-terparkir';
 }

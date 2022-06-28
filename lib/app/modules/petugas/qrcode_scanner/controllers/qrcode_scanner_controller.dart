@@ -29,7 +29,8 @@ class QrcodeScannerController extends GetxController {
       'masuk': FieldValue.serverTimestamp(),
       'kendaraan': idKendaraan,
       'pengendara': idPengendara,
-      'petugas': idPetugas
+      'petugas': idPetugas,
+      'active': true
     });
     Get.back();
     Get.defaultDialog(middleText: 'Kendaraan Masuk');
