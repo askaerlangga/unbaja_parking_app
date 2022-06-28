@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -25,10 +26,53 @@ class PengendaraView extends GetView<HomeController> {
               icon: const Icon(Icons.logout))
         ],
       ),
-      body: FutureBuilder(
-          future: Future.delayed(Duration.zero),
-          builder: (context, _) {
-            if (controller.nameUser.value == '') {
+      body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+          stream: controller.getUserData(controller.uid),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.active &&
+                snapshot.data!.data() != null) {
+              var userData = snapshot.data!.data() as Map<String, dynamic>;
+              if (userData['nama'] != null) {
+                return ListView(
+                  children: [
+                    UserInfoPanel(
+                      nameUser: userData['nama'],
+                      levelUser: userData['level'],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                      child: Column(
+                        children: <Widget>[
+                          MenuButton(
+                              label: 'Tampil QR Code',
+                              icon: Icons.qr_code,
+                              onPressed: () {
+                                Get.toNamed(Routes.PENAMPIL_QRCODE,
+                                    arguments: auth.uid.value);
+                              }),
+                          MenuButton(
+                              label: 'Kendaraan Saya',
+                              icon: Icons.directions_car,
+                              onPressed: () {
+                                Get.toNamed(Routes.KENDARAAN_SAYA,
+                                    arguments: auth.uid.value);
+                              }),
+                          MenuButton(
+                              label: 'Pengaturan Profil',
+                              icon: Icons.person,
+                              onPressed: () {
+                                Get.toNamed(Routes.PENGATURAN_PROFIL,
+                                    arguments: 'Pengaturan Profil');
+                              }),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              }
               return Center(
                 child: Padding(
                   padding: const EdgeInsets.all(20),
@@ -65,43 +109,9 @@ class PengendaraView extends GetView<HomeController> {
                 ),
               );
             }
-            return ListView(children: <Widget>[
-              UserInfoPanel(
-                nameUser: controller.nameUser.value,
-                levelUser: controller.levelUser.value,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-                child: Column(
-                  children: <Widget>[
-                    MenuButton(
-                        label: 'Tampil QR Code',
-                        icon: Icons.qr_code,
-                        onPressed: () {
-                          Get.toNamed(Routes.PENAMPIL_QRCODE,
-                              arguments: auth.uid);
-                        }),
-                    MenuButton(
-                        label: 'Kendaraan Saya',
-                        icon: Icons.directions_car,
-                        onPressed: () {
-                          Get.toNamed(Routes.KENDARAAN_SAYA,
-                              arguments: auth.uid);
-                        }),
-                    MenuButton(
-                        label: 'Pengaturan Profil',
-                        icon: Icons.person,
-                        onPressed: () {
-                          Get.toNamed(Routes.PENGATURAN_PROFIL,
-                              arguments: 'Pengaturan Profil');
-                        }),
-                  ],
-                ),
-              ),
-            ]);
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }),
     );
   }

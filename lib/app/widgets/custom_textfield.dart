@@ -5,12 +5,14 @@ class CustomTextField extends StatelessWidget {
   final String labelText;
   final Widget? prefixIcon;
   final bool? enable;
+  final TextInputType? keyboardType;
   const CustomTextField(
       {Key? key,
       required this.controller,
       required this.labelText,
       this.prefixIcon,
-      this.enable})
+      this.enable,
+      this.keyboardType})
       : super(key: key);
 
   @override
@@ -20,6 +22,7 @@ class CustomTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         enabled: enable,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
             prefixIcon: prefixIcon,
             labelText: labelText,
