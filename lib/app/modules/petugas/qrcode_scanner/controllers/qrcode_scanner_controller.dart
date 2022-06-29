@@ -10,7 +10,6 @@ class QrcodeScannerController extends GetxController {
   String? idKendaraan;
   String? idPetugas;
 
-  bool? active;
   String? idParkir;
 
   MobileScannerController cameraController = MobileScannerController();

@@ -9,8 +9,10 @@ import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 
 class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
   const ScannerDetailPengendaraView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    bool? active;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail Pengendara'),
@@ -60,7 +62,7 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
                           var dataParkir = (snapshot.data!.docs[0]).data();
                           controller.idParkir =
                               (snapshot.data!.docs[0]).reference.id;
-                          controller.active = dataParkir['active'];
+                          active = dataParkir['active'];
                           print('DATA PARKIR $dataParkir');
                           var date = DateFormat('dd-MM-yyyy, HH:mm').format(
                               DateTime.parse((dataParkir['masuk'] as Timestamp)
@@ -94,8 +96,7 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
                   CustomButton(
                       label: 'PROSES',
                       onPressed: () {
-                        if (controller.active == null ||
-                            controller.active == false) {
+                        if (active == null || active == false) {
                           controller.parkirMasuk();
                         } else {
                           controller.parkirKeluar(controller.idParkir!);
