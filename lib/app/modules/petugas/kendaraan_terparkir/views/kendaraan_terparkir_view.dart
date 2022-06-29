@@ -34,7 +34,8 @@ class KendaraanTerparkirView extends GetView<KendaraanTerparkirController> {
                         stream: controller
                             .getDataKendaraan(dataKendaraan['kendaraan']),
                         builder: (context, snapshot) {
-                          if (snapshot.data != null) {
+                          if (snapshot.data != null &&
+                              snapshot.data?.data() != null) {
                             var data = snapshot.data!.data()!;
                             return GestureDetector(
                               onTap: () => Get.toNamed(
@@ -76,7 +77,8 @@ class KendaraanTerparkirView extends GetView<KendaraanTerparkirController> {
                               ),
                             );
                           }
-                          return Text('');
+                          return const Center(
+                              child: Text('Tidak ada kendaraan terparkir'));
                         });
                   });
             }
