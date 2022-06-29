@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/container_detail_pengendara_widget.dart';
 import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/controllers/qrcode_scanner_controller.dart';
 import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
@@ -51,13 +52,54 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
                         }
                         return const Text('');
                       }),
+                  FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                      future: controller.getDataParkir(controller.idKendaraan!),
+                      builder: (context, snapshot) {
+                        if (snapshot.data != null &&
+                            snapshot.data!.docs.length > 0) {
+                          var dataParkir = (snapshot.data!.docs[0]).data();
+                          controller.idParkir =
+                              (snapshot.data!.docs[0]).reference.id;
+                          controller.active = dataParkir['active'];
+                          print('DATA PARKIR $dataParkir');
+                          var date = DateFormat('dd-MM-yyyy, HH:mm').format(
+                              DateTime.parse((dataParkir['masuk'] as Timestamp)
+                                  .toDate()
+                                  .toString()));
+                          return Column(
+                            children: [
+                              ContainerDetailPengendara(
+                                  title: 'Masuk :', middleText: date),
+                              FutureBuilder<
+                                      DocumentSnapshot<Map<String, dynamic>>>(
+                                  future: controller.getDataPetugas(
+                                      dataParkir['petugas_masuk']),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.data != null) {
+                                      var dataPetugas = snapshot.data!.data()!;
+                                      return ContainerDetailPengendara(
+                                          title: 'Petugas Masuk :',
+                                          middleText: dataPetugas['nama']);
+                                    }
+                                    return Text('');
+                                  })
+                            ],
+                          );
+                        }
+                        return Text('');
+                      }),
                   const SizedBox(
                     height: 20,
                   ),
                   CustomButton(
                       label: 'PROSES',
                       onPressed: () {
-                        controller.parkirMasuk();
+                        if (controller.active == null ||
+                            controller.active == false) {
+                          controller.parkirMasuk();
+                        } else {
+                          controller.parkirKeluar(controller.idParkir!);
+                        }
                       })
                 ])
               ],

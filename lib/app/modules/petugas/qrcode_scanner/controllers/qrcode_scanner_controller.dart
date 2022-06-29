@@ -9,6 +9,9 @@ class QrcodeScannerController extends GetxController {
   String? idKendaraan;
   String? idPetugas;
 
+  bool? active;
+  String? idParkir;
+
   MobileScannerController cameraController = MobileScannerController();
   var scanCode = ''.obs;
   TextEditingController nomorPlat = TextEditingController();
@@ -24,15 +27,40 @@ class QrcodeScannerController extends GetxController {
     return dataPengendara.get();
   }
 
+  Future<QuerySnapshot<Map<String, dynamic>>> getDataParkir(
+      String idKendaraan) {
+    var dataParkir = db.collection('parking');
+    return dataParkir
+        .where('kendaraan', isEqualTo: idKendaraan)
+        .where('active', isEqualTo: true)
+        .get();
+  }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getDataPetugas(
+      String idPetugas) {
+    var dataPetugas = db.collection('users').doc(idPetugas);
+    return dataPetugas.get();
+  }
+
   void parkirMasuk() {
     db.collection('parking').add({
       'masuk': FieldValue.serverTimestamp(),
       'kendaraan': idKendaraan,
       'pengendara': idPengendara,
-      'petugas': idPetugas,
+      'petugas_masuk': idPetugas,
       'active': true
     });
     Get.back();
     Get.defaultDialog(middleText: 'Kendaraan Masuk');
+  }
+
+  void parkirKeluar(String idParkir) {
+    db.collection('parking').doc(idParkir).update({
+      'keluar': FieldValue.serverTimestamp(),
+      'petugas_keluar': idPetugas,
+      'active': false
+    });
+    Get.back();
+    Get.defaultDialog(middleText: 'Kendaraan Keluar');
   }
 }
