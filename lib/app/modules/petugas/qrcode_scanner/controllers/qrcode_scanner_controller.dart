@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 
 class QrcodeScannerController extends GetxController {
   var db = FirebaseFirestore.instance;
@@ -40,6 +41,22 @@ class QrcodeScannerController extends GetxController {
       String idPetugas) {
     var dataPetugas = db.collection('users').doc(idPetugas);
     return dataPetugas.get();
+  }
+
+  void cariManual(var argument) {
+    db
+        .collection('vehicles')
+        .where('nomor_plat', isEqualTo: nomorPlat.text.toUpperCase())
+        .get()
+        .then((value) {
+      if (value.docs.isNotEmpty) {
+        var data = value.docs[0].reference.id;
+        Get.toNamed(Routes.SCANNER_DETAIL_PENGENDARA,
+            arguments: [data, argument]);
+      } else {
+        Get.defaultDialog(middleText: 'Kendaraan tidak terdaftar');
+      }
+    });
   }
 
   void parkirMasuk() {

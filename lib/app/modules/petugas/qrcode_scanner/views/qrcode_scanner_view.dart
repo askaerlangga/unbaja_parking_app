@@ -84,7 +84,11 @@ class QrcodeScannerView extends GetView<QrcodeScannerController> {
                   const SizedBox(
                     height: 10,
                   ),
-                  CustomButton(label: 'PROSES', onPressed: () {})
+                  CustomButton(
+                      label: 'PROSES',
+                      onPressed: () {
+                        controller.cariManual(Get.arguments);
+                      })
                 ],
               ),
             ))
