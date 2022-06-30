@@ -95,13 +95,13 @@ class PetugasView extends GetView<HomeController> {
                             snapshot.data!.docs.isNotEmpty) {
                           print(snapshot.data!.docs.length);
                           return ParkirIndikator(
-                              icon: Icons.local_parking,
+                              icon: Icons.logout,
                               label: 'Keluar',
                               middleText: '${snapshot.data!.docs.length}',
                               color: Colors.red);
                         }
                         return const ParkirIndikator(
-                            icon: Icons.local_parking,
+                            icon: Icons.logout,
                             label: 'Keluar',
                             middleText: '0',
                             color: Colors.red);
