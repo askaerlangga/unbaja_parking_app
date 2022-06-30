@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:unbaja_parking_app/app/controllers/auth_controller.dart';
 import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 
@@ -35,5 +36,48 @@ class HomeController extends GetxController {
           auth.uid.value = '';
           Get.offAllNamed(Routes.LOGIN);
         });
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getKendaraanTerparkir() {
+    var timeNow = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    var firstTime = Timestamp.fromMillisecondsSinceEpoch(
+        DateTime.parse('$timeNow 00:00:00').millisecondsSinceEpoch);
+    var lastTime = Timestamp.fromMillisecondsSinceEpoch(
+        DateTime.parse('$timeNow 23:59:00').millisecondsSinceEpoch);
+    var listKendaraan = db
+        .collection('parking')
+        .where('active', isEqualTo: true)
+        .where('masuk', isLessThan: lastTime)
+        .where('masuk', isGreaterThan: firstTime)
+        .snapshots();
+    return listKendaraan;
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getKendaraanMasuk() {
+    var timeNow = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    var firstTime = Timestamp.fromMillisecondsSinceEpoch(
+        DateTime.parse('$timeNow 00:00:00').millisecondsSinceEpoch);
+    var lastTime = Timestamp.fromMillisecondsSinceEpoch(
+        DateTime.parse('$timeNow 23:59:00').millisecondsSinceEpoch);
+    var listKendaraan = db
+        .collection('parking')
+        .where('masuk', isLessThan: lastTime)
+        .where('masuk', isGreaterThan: firstTime)
+        .snapshots();
+    return listKendaraan;
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getKendaraanKeluar() {
+    var timeNow = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    var firstTime = Timestamp.fromMillisecondsSinceEpoch(
+        DateTime.parse('$timeNow 00:00:00').millisecondsSinceEpoch);
+    var lastTime = Timestamp.fromMillisecondsSinceEpoch(
+        DateTime.parse('$timeNow 23:59:00').millisecondsSinceEpoch);
+    var listKendaraan = db
+        .collection('parking')
+        .where('keluar', isLessThan: lastTime)
+        .where('keluar', isGreaterThan: firstTime)
+        .snapshots();
+    return listKendaraan;
   }
 }
