@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:unbaja_parking_app/app/modules/petugas/kendaraan_terparkir/views/detail_kendaraan_terparkir_view.dart';
 
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
@@ -20,6 +19,7 @@ import '../modules/pengendara/tambah_edit_kendaraan/views/tambah_edit_kendaraan_
 import '../modules/pengendara/ubah_password_pengendara/bindings/ubah_password_pengendara_binding.dart';
 import '../modules/pengendara/ubah_password_pengendara/views/ubah_password_pengendara_view.dart';
 import '../modules/petugas/kendaraan_terparkir/bindings/kendaraan_terparkir_binding.dart';
+import '../modules/petugas/kendaraan_terparkir/views/detail_kendaraan_terparkir_view.dart';
 import '../modules/petugas/kendaraan_terparkir/views/kendaraan_terparkir_view.dart';
 import '../modules/petugas/qrcode_scanner/bindings/qrcode_scanner_binding.dart';
 import '../modules/petugas/qrcode_scanner/views/qrcode_scanner_view.dart';
