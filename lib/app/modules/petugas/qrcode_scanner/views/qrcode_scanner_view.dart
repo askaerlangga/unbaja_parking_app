@@ -76,7 +76,7 @@ class QrcodeScannerView extends GetView<QrcodeScannerController> {
                     height: 20,
                   ),
                   TextField(
-                    controller: controller.nomorPlat,
+                    controller: controller.nomorPlatController,
                     decoration: const InputDecoration(
                         labelText: 'Nomor Plat Kendaraan',
                         border: OutlineInputBorder()),

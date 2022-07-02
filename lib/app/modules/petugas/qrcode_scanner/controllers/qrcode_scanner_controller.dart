@@ -9,12 +9,12 @@ class QrcodeScannerController extends GetxController {
   String? idPengendara;
   String? idKendaraan;
   String? idPetugas;
-
   String? idParkir;
+  String? nomorPlat;
 
   MobileScannerController cameraController = MobileScannerController();
   var scanCode = ''.obs;
-  TextEditingController nomorPlat = TextEditingController();
+  TextEditingController nomorPlatController = TextEditingController();
 
   Future<DocumentSnapshot<Map<String, dynamic>>> getDataKendaraan(
       String idKendaraan) {
@@ -45,7 +45,7 @@ class QrcodeScannerController extends GetxController {
   void cariManual(var argument) {
     db
         .collection('vehicles')
-        .where('nomor_plat', isEqualTo: nomorPlat.text.toUpperCase())
+        .where('nomor_plat', isEqualTo: nomorPlatController.text.toUpperCase())
         .get()
         .then((value) {
       if (value.docs.isNotEmpty) {
@@ -64,6 +64,7 @@ class QrcodeScannerController extends GetxController {
       'kendaraan': idKendaraan,
       'pengendara': idPengendara,
       'petugas_masuk': idPetugas,
+      'nomor_plat': nomorPlat,
       'active': true
     });
     Get.back();

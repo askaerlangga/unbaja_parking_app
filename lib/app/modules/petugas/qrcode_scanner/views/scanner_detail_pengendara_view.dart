@@ -27,6 +27,7 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
             controller.idKendaraan = Get.arguments[0];
             controller.idPengendara = dataKendaraan['pemilik'];
             controller.idPetugas = Get.arguments[1];
+            controller.nomorPlat = dataKendaraan['nomor_plat'];
             return ListView(
               padding: const EdgeInsets.all(20),
               children: [

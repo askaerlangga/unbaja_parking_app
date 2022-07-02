@@ -10,6 +10,7 @@ class KendaraanTerparkirView extends GetView<KendaraanTerparkirController> {
   const KendaraanTerparkirView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // controller.search.value.text = 'ASKA';
     return Scaffold(
       appBar: AppBar(
         title: const Text('Kendaraan Terparkir'),
@@ -21,7 +22,7 @@ class KendaraanTerparkirView extends GetView<KendaraanTerparkirController> {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: TextField(
-              controller: controller.search,
+              controller: controller.searchController,
               decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -31,7 +32,10 @@ class KendaraanTerparkirView extends GetView<KendaraanTerparkirController> {
                     icon: const Icon(
                       Icons.search,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.searchKeyword.value =
+                          controller.searchController.text.toUpperCase();
+                    },
                   ),
                   labelText: 'Cari Kendaraan',
                   border: const OutlineInputBorder()),
@@ -40,35 +44,39 @@ class KendaraanTerparkirView extends GetView<KendaraanTerparkirController> {
           const SizedBox(
             height: 10,
           ),
-          StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-            stream: controller.getListKendaraanTerparkir(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.active &&
-                  snapshot.data != null) {
-                var listKendaraan = snapshot.data!.docs;
-                print('LIST $listKendaraan');
-                if (listKendaraan.isNotEmpty) {
-                  return Expanded(
-                    child: ListView.builder(
-                        padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-                        itemCount: listKendaraan.length,
-                        itemBuilder: (context, index) {
-                          var dataKendaraan = listKendaraan[index].data();
-                          print('DATA KENDARAAN ${dataKendaraan}');
-                          return ListKendaraanTerparkir(
-                              streamDataKendaraan: controller
-                                  .getDataKendaraan(dataKendaraan['kendaraan']),
-                              keteranganParkir: 'masuk',
-                              dataWaktu: dataKendaraan['masuk'],
-                              keteranganParkirColor: Colors.green);
-                        }),
-                  );
-                }
-                return const Center(child: Text('Tidak ada kendaraan'));
-              }
-              return const Center(child: CircularProgressIndicator());
-            },
-          )
+          Obx(() => StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                stream: (controller.searchKeyword.value != null &&
+                        controller.searchKeyword.value != '')
+                    ? controller.searchKendaraanTerparkir()
+                    : controller.getListKendaraanTerparkir(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.active &&
+                      snapshot.data != null) {
+                    var listKendaraan = snapshot.data!.docs;
+                    print('LIST $listKendaraan');
+                    if (listKendaraan.isNotEmpty) {
+                      return Expanded(
+                        child: ListView.builder(
+                            padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+                            itemCount: listKendaraan.length,
+                            itemBuilder: (context, index) {
+                              var dataKendaraan = listKendaraan[index].data();
+                              print('DATA KENDARAAN ${dataKendaraan}');
+                              return ListKendaraanTerparkir(
+                                  streamDataKendaraan:
+                                      controller.getDataKendaraan(
+                                          dataKendaraan['kendaraan']),
+                                  keteranganParkir: 'masuk',
+                                  dataWaktu: dataKendaraan['masuk'],
+                                  keteranganParkirColor: Colors.green);
+                            }),
+                      );
+                    }
+                    return const Center(child: Text('Tidak ada kendaraan'));
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                },
+              ))
         ],
       ),
     );
