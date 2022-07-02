@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unbaja_parking_app/app/widgets/list_kendaraan_terparkir.dart';
 
-import '../controllers/kendaraan_terparkir_controller.dart';
+import '../controllers/riwayat_kendaraan_parkir_controller.dart';
 
-class KendaraanTerparkirView extends GetView<KendaraanTerparkirController> {
-  const KendaraanTerparkirView({Key? key}) : super(key: key);
+class RiwayatKendaraanParkirView
+    extends GetView<RiwayatKendaraanParkirController> {
+  const RiwayatKendaraanParkirView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kendaraan Terparkir'),
+        title: const Text('Riwayat Parkir'),
         centerTitle: true,
       ),
       body: Column(
@@ -46,8 +47,8 @@ class KendaraanTerparkirView extends GetView<KendaraanTerparkirController> {
           Obx(() => StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                 stream: (controller.searchKeyword.value != null &&
                         controller.searchKeyword.value != '')
-                    ? controller.searchKendaraanTerparkir()
-                    : controller.getListKendaraanTerparkir(),
+                    ? controller.searchParkir()
+                    : controller.getListParkir(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.active &&
                       snapshot.data != null) {
@@ -65,9 +66,9 @@ class KendaraanTerparkirView extends GetView<KendaraanTerparkirController> {
                                   streamDataKendaraan:
                                       controller.getDataKendaraan(
                                           dataKendaraan['kendaraan']),
-                                  keteranganParkir: 'masuk',
-                                  dataWaktu: dataKendaraan['masuk'],
-                                  keteranganParkirColor: Colors.green);
+                                  keteranganParkir: 'keluar',
+                                  dataWaktu: dataKendaraan['keluar'],
+                                  keteranganParkirColor: Colors.red);
                             }),
                       );
                     }
