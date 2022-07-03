@@ -24,6 +24,11 @@ class RiwayatKendaraanParkirView
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: TextField(
+              onEditingComplete: () {
+                controller.searchKeyword.value =
+                    controller.searchController.text.toUpperCase();
+              },
+              textCapitalization: TextCapitalization.characters,
               controller: controller.searchController,
               decoration: InputDecoration(
                   filled: true,
@@ -49,8 +54,6 @@ class RiwayatKendaraanParkirView
                 if (snapshot.data != null) {
                   var firstDate =
                       snapshot.data?.docs.first.data()['keluar'] as Timestamp;
-                  var lastDate =
-                      snapshot.data?.docs.last.data()['keluar'] as Timestamp;
 
                   return Padding(
                     padding: const EdgeInsets.all(20),
@@ -71,11 +74,6 @@ class RiwayatKendaraanParkirView
                           print(controller.selectedDay.value);
                         }),
                   );
-
-                  print('PRINT SNAPSHOT ${snapshot.data}');
-                  print('LENGTH ${snapshot.data?.docs.last.data()}');
-                  // print(oke);
-                  // return Text('Hello');
                 }
                 return Text('data');
               }),
