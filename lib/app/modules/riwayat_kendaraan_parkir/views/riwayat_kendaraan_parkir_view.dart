@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 import 'package:unbaja_parking_app/app/widgets/list_kendaraan_terparkir.dart';
 
 import '../controllers/riwayat_kendaraan_parkir_controller.dart';
@@ -41,8 +42,23 @@ class RiwayatKendaraanParkirView
                   border: const OutlineInputBorder()),
             ),
           ),
-          const SizedBox(
-            height: 10,
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: CustomButton(
+                label: 'Pilih Tanggal',
+                onPressed: () async {
+                  DateTime? select = await showDatePicker(
+                      context: context,
+                      initialDate: controller.selectedDay.value,
+                      firstDate: DateTime(2021),
+                      lastDate: DateTime(2023));
+                  print(select);
+                  if (select != null &&
+                      select != controller.selectedDay.value) {
+                    controller.selectedDay.value = select;
+                  }
+                  print(controller.selectedDay.value);
+                }),
           ),
           Obx(() => StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                 stream: (controller.searchKeyword.value != null &&

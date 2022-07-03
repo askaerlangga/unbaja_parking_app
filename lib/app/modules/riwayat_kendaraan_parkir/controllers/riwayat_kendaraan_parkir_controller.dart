@@ -7,6 +7,7 @@ class RiwayatKendaraanParkirController extends GetxController {
   final db = FirebaseFirestore.instance;
   TextEditingController searchController = TextEditingController();
   var searchKeyword = ''.obs;
+  var selectedDay = DateTime.now().obs;
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> getDataKendaraan(
       String idKendaraaan) {
@@ -15,7 +16,7 @@ class RiwayatKendaraanParkirController extends GetxController {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getListParkir() {
-    var timeNow = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    var timeNow = DateFormat('yyyy-MM-dd').format(selectedDay.value);
     var firstTime = Timestamp.fromMillisecondsSinceEpoch(
         DateTime.parse('$timeNow 00:00:00').millisecondsSinceEpoch);
     var lastTime = Timestamp.fromMillisecondsSinceEpoch(
@@ -32,7 +33,7 @@ class RiwayatKendaraanParkirController extends GetxController {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> searchParkir() {
-    var timeNow = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    var timeNow = DateFormat('yyyy-MM-dd').format(selectedDay.value);
     var firstTime = Timestamp.fromMillisecondsSinceEpoch(
         DateTime.parse('$timeNow 00:00:00').millisecondsSinceEpoch);
     var lastTime = Timestamp.fromMillisecondsSinceEpoch(
