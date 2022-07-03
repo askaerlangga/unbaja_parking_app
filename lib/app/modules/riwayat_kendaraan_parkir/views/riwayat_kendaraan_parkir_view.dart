@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 import 'package:unbaja_parking_app/app/widgets/list_kendaraan_terparkir.dart';
+import 'package:unbaja_parking_app/app/widgets/list_kendaraan_terparkir_tamu.dart';
 
 import '../controllers/riwayat_kendaraan_parkir_controller.dart';
 
@@ -97,6 +98,16 @@ class RiwayatKendaraanParkirView
                             itemBuilder: (context, index) {
                               var dataKendaraan = listKendaraan[index].data();
                               print('DATA KENDARAAN ${dataKendaraan}');
+                              if (dataKendaraan['kendaraan'] == null) {
+                                return ListKendaraanTerparkirTamu(
+                                    keteranganParkir: 'keluar',
+                                    dataWaktu: dataKendaraan['keluar'],
+                                    keteranganParkirColor: Colors.red,
+                                    jenisKendaraan:
+                                        dataKendaraan['jenis_kendaraan'],
+                                    nomorPlat: dataKendaraan['nomor_plat'],
+                                    merekKendaraan: dataKendaraan['merek']);
+                              }
                               return ListKendaraanTerparkir(
                                   streamDataKendaraan:
                                       controller.getDataKendaraan(
