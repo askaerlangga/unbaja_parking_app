@@ -119,7 +119,10 @@ class PetugasView extends GetView<HomeController> {
               MenuButton(
                   label: 'Pengendara Umum / Tamu',
                   icon: Icons.directions_car,
-                  onPressed: () {}),
+                  onPressed: () {
+                    Get.toNamed(Routes.KENDARAAN_TAMU,
+                        arguments: controller.uid);
+                  }),
               MenuButton(
                   label: 'Kendaraan Terparkir',
                   icon: Icons.local_parking,
