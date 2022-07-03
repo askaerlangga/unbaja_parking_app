@@ -48,4 +48,9 @@ class RiwayatKendaraanParkirController extends GetxController {
         .snapshots();
     return listKendaraan;
   }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> getDateRange() {
+    var list = db.collection('parking').orderBy('keluar').get();
+    return list;
+  }
 }

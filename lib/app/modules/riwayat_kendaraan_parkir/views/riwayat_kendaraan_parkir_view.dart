@@ -42,24 +42,43 @@ class RiwayatKendaraanParkirView
                   border: const OutlineInputBorder()),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: CustomButton(
-                label: 'Pilih Tanggal',
-                onPressed: () async {
-                  DateTime? select = await showDatePicker(
-                      context: context,
-                      initialDate: controller.selectedDay.value,
-                      firstDate: DateTime(2021),
-                      lastDate: DateTime(2023));
-                  print(select);
-                  if (select != null &&
-                      select != controller.selectedDay.value) {
-                    controller.selectedDay.value = select;
-                  }
-                  print(controller.selectedDay.value);
-                }),
-          ),
+          FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              future: controller.getDateRange(),
+              builder: (context, snapshot) {
+                if (snapshot.data != null) {
+                  var firstDate =
+                      snapshot.data?.docs.first.data()['keluar'] as Timestamp;
+                  var lastDate =
+                      snapshot.data?.docs.last.data()['keluar'] as Timestamp;
+
+                  return Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: CustomButton(
+                        label: 'Pilih Tanggal',
+                        onPressed: () async {
+                          DateTime? select = await showDatePicker(
+                              context: context,
+                              initialDate: controller.selectedDay.value,
+                              firstDate: DateTime.parse(
+                                  (firstDate).toDate().toString()),
+                              lastDate: DateTime.now());
+                          print(select);
+                          if (select != null &&
+                              select != controller.selectedDay.value) {
+                            controller.selectedDay.value = select;
+                          }
+                          print(controller.selectedDay.value);
+                        }),
+                  );
+
+                  print('PRINT SNAPSHOT ${snapshot.data}');
+                  print('LENGTH ${snapshot.data?.docs.last.data()}');
+                  // print(oke);
+                  // return Text('Hello');
+                }
+                return Text('data');
+              }),
+
           Obx(() => StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                 stream: (controller.searchKeyword.value != null &&
                         controller.searchKeyword.value != '')
