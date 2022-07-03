@@ -6,13 +6,15 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final bool? enable;
   final TextInputType? keyboardType;
+  final TextCapitalization textCapitalization;
   const CustomTextField(
       {Key? key,
       required this.controller,
       required this.labelText,
       this.prefixIcon,
       this.enable,
-      this.keyboardType})
+      this.keyboardType,
+      this.textCapitalization = TextCapitalization.none})
       : super(key: key);
 
   @override
@@ -20,6 +22,7 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: TextField(
+        textCapitalization: textCapitalization,
         controller: controller,
         enabled: enable,
         keyboardType: keyboardType,

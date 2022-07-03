@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:unbaja_parking_app/app/modules/kendaraan_tamu/views/kendaraan_tamu_masuk_view.dart';
 
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
@@ -116,6 +117,11 @@ class AppPages {
     GetPage(
       name: _Paths.KENDARAAN_TAMU,
       page: () => const KendaraanTamuView(),
+      binding: KendaraanTamuBinding(),
+    ),
+    GetPage(
+      name: _Paths.KENDARAAN_TAMU_MASUK,
+      page: () => const KendaraanTamuMasukView(),
       binding: KendaraanTamuBinding(),
     ),
     GetPage(
