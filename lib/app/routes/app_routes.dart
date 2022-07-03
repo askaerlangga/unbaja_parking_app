@@ -20,6 +20,9 @@ abstract class Routes {
   static const DETAIL_KENDARAAN_TERPARKIR = _Paths.DETAIL_KENDARAAN_TERPARKIR;
   static const KENDARAAN_TAMU = _Paths.KENDARAAN_TAMU;
   static const KENDARAAN_TAMU_MASUK = _Paths.KENDARAAN_TAMU_MASUK;
+  static const KENDARAAN_TAMU_KELUAR = _Paths.KENDARAAN_TAMU_KELUAR;
+  static const KENDARAAN_TAMU_KELUAR_DETAIL =
+      _Paths.KENDARAAN_TAMU_KELUAR_DETAIL;
   static const RIWAYAT_KENDARAAN_PARKIR = _Paths.RIWAYAT_KENDARAAN_PARKIR;
 }
 
@@ -42,5 +45,7 @@ abstract class _Paths {
   static const DETAIL_KENDARAAN_TERPARKIR = '/detail-kendaraan-terparkir';
   static const KENDARAAN_TAMU = '/kendaraan-tamu';
   static const KENDARAAN_TAMU_MASUK = '/kendaraan-tamu-masuk';
+  static const KENDARAAN_TAMU_KELUAR = '/kendaraan-tamu-keluar';
+  static const KENDARAAN_TAMU_KELUAR_DETAIL = '/kendaraan-tamu-keluar-detail';
   static const RIWAYAT_KENDARAAN_PARKIR = '/riwayat-kendaraan-parkir';
 }

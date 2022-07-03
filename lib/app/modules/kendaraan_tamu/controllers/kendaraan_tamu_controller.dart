@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 
 class KendaraanTamuController extends GetxController {
   final db = FirebaseFirestore.instance;
@@ -26,5 +27,38 @@ class KendaraanTamuController extends GetxController {
     } else {
       Get.defaultDialog(middleText: 'Semua data harus diisi');
     }
+  }
+
+  void cariKendaraan() {
+    db
+        .collection('parking')
+        .where('nomor_plat', isEqualTo: nomorPlat.text.toUpperCase())
+        .where('active', isEqualTo: true)
+        .where('pengendara', isEqualTo: 'Tamu')
+        .get()
+        .then((value) {
+      if (value.docs.isNotEmpty) {
+        var data = value.docs[0].reference.id;
+        Get.toNamed(Routes.KENDARAAN_TAMU_KELUAR_DETAIL, arguments: data);
+      } else {
+        Get.defaultDialog(middleText: 'Kendaraan tidak ada');
+      }
+    });
+  }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getDataParkir(
+      String idParkir) {
+    var parkir = db.collection('parking').doc(idParkir).get();
+    return parkir;
+  }
+
+  void parkirKeluar(String idParkir) {
+    db.collection('parking').doc(idParkir).update({
+      'keluar': FieldValue.serverTimestamp(),
+      'petugas_keluar': idPetugas,
+      'active': false
+    });
+    Get.back();
+    Get.defaultDialog(middleText: 'Kendaraan Keluar');
   }
 }

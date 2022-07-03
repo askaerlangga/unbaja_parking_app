@@ -30,7 +30,11 @@ class KendaraanTamuView extends GetView<KendaraanTamuController> {
               height: 10,
             ),
             CustomButton(
-                icon: Icons.logout, label: 'Kendaraan Keluar', onPressed: () {})
+                icon: Icons.logout,
+                label: 'Kendaraan Keluar',
+                onPressed: () {
+                  Get.toNamed(Routes.KENDARAAN_TAMU_KELUAR);
+                })
           ]),
         ),
       ),

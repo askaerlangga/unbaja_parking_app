@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:unbaja_parking_app/app/modules/kendaraan_tamu/views/kendaraan_tamu_keluar_detail_view.dart';
+import 'package:unbaja_parking_app/app/modules/kendaraan_tamu/views/kendaraan_tamu_keluar_view.dart';
 import 'package:unbaja_parking_app/app/modules/kendaraan_tamu/views/kendaraan_tamu_masuk_view.dart';
 
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
@@ -122,6 +124,16 @@ class AppPages {
     GetPage(
       name: _Paths.KENDARAAN_TAMU_MASUK,
       page: () => const KendaraanTamuMasukView(),
+      binding: KendaraanTamuBinding(),
+    ),
+    GetPage(
+      name: _Paths.KENDARAAN_TAMU_KELUAR,
+      page: () => const KendaraanTamuKeluarView(),
+      binding: KendaraanTamuBinding(),
+    ),
+    GetPage(
+      name: _Paths.KENDARAAN_TAMU_KELUAR_DETAIL,
+      page: () => const KendaraanTamuKeluarDetailView(),
       binding: KendaraanTamuBinding(),
     ),
     GetPage(
