@@ -1,9 +1,7 @@
 import 'package:get/get.dart';
-import 'package:unbaja_parking_app/app/modules/kendaraan_tamu/views/kendaraan_tamu_keluar_detail_view.dart';
-import 'package:unbaja_parking_app/app/modules/kendaraan_tamu/views/kendaraan_tamu_keluar_view.dart';
-import 'package:unbaja_parking_app/app/modules/kendaraan_tamu/views/kendaraan_tamu_masuk_view.dart';
-import 'package:unbaja_parking_app/app/modules/riwayat_kendaraan_parkir/views/detail_riwayat_kendaraan_parkir_view.dart';
 
+import '../modules/data_pengendara/bindings/data_pengendara_binding.dart';
+import '../modules/data_pengendara/views/data_pengendara_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -11,6 +9,9 @@ import '../modules/home/views/admin/menu_data_pengguna_view.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/home/views/pengendara/pengaturan_profil_view.dart';
 import '../modules/kendaraan_tamu/bindings/kendaraan_tamu_binding.dart';
+import '../modules/kendaraan_tamu/views/kendaraan_tamu_keluar_detail_view.dart';
+import '../modules/kendaraan_tamu/views/kendaraan_tamu_keluar_view.dart';
+import '../modules/kendaraan_tamu/views/kendaraan_tamu_masuk_view.dart';
 import '../modules/kendaraan_tamu/views/kendaraan_tamu_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
@@ -31,6 +32,7 @@ import '../modules/petugas/qrcode_scanner/bindings/qrcode_scanner_binding.dart';
 import '../modules/petugas/qrcode_scanner/views/qrcode_scanner_view.dart';
 import '../modules/petugas/qrcode_scanner/views/scanner_detail_pengendara_view.dart';
 import '../modules/riwayat_kendaraan_parkir/bindings/riwayat_kendaraan_parkir_binding.dart';
+import '../modules/riwayat_kendaraan_parkir/views/detail_riwayat_kendaraan_parkir_view.dart';
 import '../modules/riwayat_kendaraan_parkir/views/riwayat_kendaraan_parkir_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
@@ -146,6 +148,11 @@ class AppPages {
       name: _Paths.DETAIL_RIWAYAT_KENDARAAN_PARKIR,
       page: () => const DetailRiwayatKendaraanParkirView(),
       binding: RiwayatKendaraanParkirBinding(),
+    ),
+    GetPage(
+      name: _Paths.DATA_PENGENDARA,
+      page: () => const DataPengendaraView(),
+      binding: DataPengendaraBinding(),
     ),
   ];
 }

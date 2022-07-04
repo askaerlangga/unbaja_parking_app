@@ -26,6 +26,7 @@ abstract class Routes {
   static const RIWAYAT_KENDARAAN_PARKIR = _Paths.RIWAYAT_KENDARAAN_PARKIR;
   static const DETAIL_RIWAYAT_KENDARAAN_PARKIR =
       _Paths.DETAIL_RIWAYAT_KENDARAAN_PARKIR;
+  static const DATA_PENGENDARA = _Paths.DATA_PENGENDARA;
 }
 
 abstract class _Paths {
@@ -52,4 +53,5 @@ abstract class _Paths {
   static const RIWAYAT_KENDARAAN_PARKIR = '/riwayat-kendaraan-parkir';
   static const DETAIL_RIWAYAT_KENDARAAN_PARKIR =
       '/detail-riwayat-kendaraan-parkir';
+  static const DATA_PENGENDARA = '/data-pengendara';
 }

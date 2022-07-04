@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 import 'package:unbaja_parking_app/app/widgets/menu_button.dart';
 
 class MenuDataPenggunaView extends GetView {
@@ -16,7 +17,11 @@ class MenuDataPenggunaView extends GetView {
           padding: EdgeInsets.all(20),
           children: <Widget>[
             MenuButton(
-                label: 'Data Pengendara', icon: Icons.person, onPressed: () {}),
+                label: 'Data Pengendara',
+                icon: Icons.person,
+                onPressed: () {
+                  Get.toNamed(Routes.DATA_PENGENDARA);
+                }),
             MenuButton(
                 label: 'Data Petugas', icon: Icons.person, onPressed: () {}),
             MenuButton(
