@@ -65,14 +65,20 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
                               (snapshot.data!.docs[0]).reference.id;
                           active = dataParkir['active'];
                           print('DATA PARKIR $dataParkir');
-                          var date = DateFormat('dd-MM-yyyy, HH:mm').format(
-                              DateTime.parse((dataParkir['masuk'] as Timestamp)
-                                  .toDate()
-                                  .toString()));
+                          var jamMasuk =
+                              (dataParkir['masuk'] as Timestamp).toDate();
+                          var durasi = DateTime.now()
+                              .difference(jamMasuk)
+                              .toString()
+                              .split('.')[0]
+                              .split(':');
+
                           return Column(
                             children: [
                               ContainerDetailPengendara(
-                                  title: 'Masuk :', middleText: date),
+                                  title: 'Masuk :',
+                                  middleText: DateFormat('dd-MM-yyyy, HH:mm')
+                                      .format(jamMasuk)),
                               FutureBuilder<
                                       DocumentSnapshot<Map<String, dynamic>>>(
                                   future: controller.getDataPetugas(
@@ -85,7 +91,11 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
                                           middleText: dataPetugas['nama']);
                                     }
                                     return Text('');
-                                  })
+                                  }),
+                              ContainerDetailPengendara(
+                                  title: 'Lama Parkir :',
+                                  middleText:
+                                      '${durasi[0]} Jam, ${durasi[1]} Menit'),
                             ],
                           );
                         }

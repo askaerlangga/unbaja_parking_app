@@ -61,4 +61,10 @@ class KendaraanTamuController extends GetxController {
     Get.back();
     Get.defaultDialog(middleText: 'Kendaraan Keluar');
   }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getDataPetugas(
+      String idPetugas) {
+    var dataPetugas = db.collection('users').doc(idPetugas);
+    return dataPetugas.get();
+  }
 }
