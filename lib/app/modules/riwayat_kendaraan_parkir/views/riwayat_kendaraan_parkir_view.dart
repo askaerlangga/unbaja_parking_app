@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 import 'package:unbaja_parking_app/app/widgets/list_kendaraan_terparkir.dart';
 import 'package:unbaja_parking_app/app/widgets/list_kendaraan_terparkir_tamu.dart';
@@ -98,6 +99,13 @@ class RiwayatKendaraanParkirView
                               print('DATA KENDARAAN ${dataKendaraan}');
                               if (dataKendaraan['kendaraan'] == null) {
                                 return ListKendaraanTerparkirTamu(
+                                    onTap: () =>
+                                        Get.toNamed(
+                                            Routes
+                                                .DETAIL_RIWAYAT_KENDARAAN_PARKIR,
+                                            arguments: [
+                                              listKendaraan[index].reference.id
+                                            ]),
                                     keteranganParkir: 'keluar',
                                     dataWaktu: dataKendaraan['keluar'],
                                     keteranganParkirColor: Colors.red,
@@ -107,6 +115,14 @@ class RiwayatKendaraanParkirView
                                     merekKendaraan: dataKendaraan['merek']);
                               }
                               return ListKendaraanTerparkir(
+                                  onTap: () => Get.toNamed(
+                                          Routes
+                                              .DETAIL_RIWAYAT_KENDARAAN_PARKIR,
+                                          arguments: [
+                                            listKendaraan[index].reference.id,
+                                            dataKendaraan['kendaraan'],
+                                            dataKendaraan['pengendara'],
+                                          ]),
                                   streamDataKendaraan:
                                       controller.getDataKendaraan(
                                           dataKendaraan['kendaraan']),

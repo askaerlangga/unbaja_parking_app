@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:unbaja_parking_app/app/modules/kendaraan_tamu/views/kendaraan_tamu_keluar_detail_view.dart';
 import 'package:unbaja_parking_app/app/modules/kendaraan_tamu/views/kendaraan_tamu_keluar_view.dart';
 import 'package:unbaja_parking_app/app/modules/kendaraan_tamu/views/kendaraan_tamu_masuk_view.dart';
+import 'package:unbaja_parking_app/app/modules/riwayat_kendaraan_parkir/views/detail_riwayat_kendaraan_parkir_view.dart';
 
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
@@ -139,6 +140,11 @@ class AppPages {
     GetPage(
       name: _Paths.RIWAYAT_KENDARAAN_PARKIR,
       page: () => const RiwayatKendaraanParkirView(),
+      binding: RiwayatKendaraanParkirBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_RIWAYAT_KENDARAAN_PARKIR,
+      page: () => const DetailRiwayatKendaraanParkirView(),
       binding: RiwayatKendaraanParkirBinding(),
     ),
   ];
