@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 import 'package:unbaja_parking_app/app/widgets/list_kendaraan_terparkir.dart';
 import 'package:unbaja_parking_app/app/widgets/list_kendaraan_terparkir_tamu.dart';
 
@@ -64,6 +65,11 @@ class KendaraanTerparkirView extends GetView<KendaraanTerparkirController> {
                               print('DATA KENDARAAN ${dataKendaraan}');
                               if (dataKendaraan['kendaraan'] == null) {
                                 return ListKendaraanTerparkirTamu(
+                                    onTap: () => Get.toNamed(
+                                            Routes.DETAIL_KENDARAAN_TERPARKIR,
+                                            arguments: [
+                                              listKendaraan[index].reference.id
+                                            ]),
                                     keteranganParkir: 'masuk',
                                     dataWaktu: dataKendaraan['masuk'],
                                     keteranganParkirColor: Colors.green,
@@ -73,6 +79,13 @@ class KendaraanTerparkirView extends GetView<KendaraanTerparkirController> {
                                     merekKendaraan: dataKendaraan['merek']);
                               }
                               return ListKendaraanTerparkir(
+                                  onTap: () => Get.toNamed(
+                                          Routes.DETAIL_KENDARAAN_TERPARKIR,
+                                          arguments: [
+                                            listKendaraan[index].reference.id,
+                                            dataKendaraan['kendaraan'],
+                                            dataKendaraan['pengendara'],
+                                          ]),
                                   streamDataKendaraan:
                                       controller.getDataKendaraan(
                                           dataKendaraan['kendaraan']),

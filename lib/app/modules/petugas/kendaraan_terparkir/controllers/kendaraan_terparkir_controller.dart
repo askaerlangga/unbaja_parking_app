@@ -33,4 +33,21 @@ class KendaraanTerparkirController extends GetxController {
         .snapshots();
     return listKendaraan;
   }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getDataParkir(
+      String idParkir) {
+    var parkir = db.collection('parking').doc(idParkir).get();
+    return parkir;
+  }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getDataPetugas(
+      String idPetugas) {
+    var dataPetugas = db.collection('users').doc(idPetugas);
+    return dataPetugas.get();
+  }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getDataPengendara(String uid) {
+    var dataPengendara = db.collection('users').doc(uid);
+    return dataPengendara.get();
+  }
 }
