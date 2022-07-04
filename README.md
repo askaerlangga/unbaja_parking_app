@@ -19,9 +19,11 @@
   <tr>
     <td>Home Petugas</td>
     <td>QR Code Scanner petugas</td>
+    <td>Riwayat Parkir</td>
   </tr
   <tr>
     <td align='center'><img src='../master/screenshot/home-petugas.png' width=150></td>
     <td align='center'><img src='../master/screenshot/qrcode-scanner-petugas.png' width=150></td>
+    <td align='center'><img src='../master/screenshot/riwayat-parkir.png' width=150></td>
   </tr>
 </table>
