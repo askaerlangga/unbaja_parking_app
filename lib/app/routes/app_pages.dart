@@ -13,6 +13,8 @@ import '../modules/kendaraan_tamu/views/kendaraan_tamu_keluar_detail_view.dart';
 import '../modules/kendaraan_tamu/views/kendaraan_tamu_keluar_view.dart';
 import '../modules/kendaraan_tamu/views/kendaraan_tamu_masuk_view.dart';
 import '../modules/kendaraan_tamu/views/kendaraan_tamu_view.dart';
+import '../modules/laporan/bindings/laporan_binding.dart';
+import '../modules/laporan/views/laporan_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/pengendara/edit_data_pengendara/bindings/edit_data_pengendara_binding.dart';
@@ -153,6 +155,11 @@ class AppPages {
       name: _Paths.DATA_PENGENDARA,
       page: () => const DataPengendaraView(),
       binding: DataPengendaraBinding(),
+    ),
+    GetPage(
+      name: _Paths.LAPORAN,
+      page: () => const LaporanView(),
+      binding: LaporanBinding(),
     ),
   ];
 }
