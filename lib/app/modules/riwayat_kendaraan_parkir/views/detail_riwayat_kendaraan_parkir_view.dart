@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:unbaja_parking_app/app/modules/riwayat_kendaraan_parkir/controllers/riwayat_kendaraan_parkir_controller.dart';
 
-import '../../petugas/qrcode_scanner/container_detail_pengendara_widget.dart';
+import '../../petugas/qrcode_scanner/widgets/container_detail_pengendara_widget.dart';
 
 class DetailRiwayatKendaraanParkirView
     extends GetView<RiwayatKendaraanParkirController> {
@@ -30,68 +30,6 @@ class DetailRiwayatKendaraanParkirView
                   .toString()
                   .split('.')[0]
                   .split(':');
-              if (dataParkir?['pengendara'] == 'Tamu') {
-                return ListView(
-                  padding: EdgeInsets.all(20),
-                  children: [
-                    ContainerDetailPengendara(
-                      title: 'Nomor Plat Kendaraan : ',
-                      middleText: dataParkir!['nomor_plat'],
-                    ),
-                    ContainerDetailPengendara(
-                      title: 'Jenis Kendaraan : ',
-                      middleText: dataParkir['jenis_kendaraan'],
-                    ),
-                    ContainerDetailPengendara(
-                      title: 'Merek Kendaraan : ',
-                      middleText: dataParkir['merek'],
-                    ),
-                    ContainerDetailPengendara(
-                      title: 'Nama Pengendara : ',
-                      middleText: dataParkir['pengendara'],
-                    ),
-                    ContainerDetailPengendara(
-                      title: 'Masuk : ',
-                      middleText:
-                          DateFormat('dd-MM-yyyy, HH:mm').format(jamMasuk),
-                    ),
-                    FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                        future: controller
-                            .getDataPetugas(dataParkir['petugas_masuk']),
-                        builder: (context, snapshot) {
-                          if (snapshot.data != null) {
-                            var dataPetugas = snapshot.data!.data()!;
-                            return ContainerDetailPengendara(
-                                title: 'Petugas Masuk :',
-                                middleText: dataPetugas['nama']);
-                          }
-                          return Text('');
-                        }),
-                    ContainerDetailPengendara(
-                      title: 'Keluar : ',
-                      middleText:
-                          DateFormat('dd-MM-yyyy, HH:mm').format(jamKeluar),
-                    ),
-                    FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                        future: controller
-                            .getDataPetugas(dataParkir['petugas_keluar']),
-                        builder: (context, snapshot) {
-                          if (snapshot.data != null) {
-                            var dataPetugas = snapshot.data!.data()!;
-                            return ContainerDetailPengendara(
-                                title: 'Petugas Keluar :',
-                                middleText: dataPetugas['nama']);
-                          }
-                          return Text('');
-                        }),
-                    ContainerDetailPengendara(
-                      title: 'Lama Parkir : ',
-                      middleText: '${durasi[0]} Jam, ${durasi[1]} Menit',
-                    ),
-                  ],
-                );
-              }
-
               return ListView(
                 padding: EdgeInsets.all(20),
                 children: [
@@ -99,73 +37,34 @@ class DetailRiwayatKendaraanParkirView
                     title: 'Nomor Plat Kendaraan : ',
                     middleText: dataParkir!['nomor_plat'],
                   ),
-                  StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                      stream: controller.getDataKendaraan(Get.arguments[1]),
-                      builder: (context, snapshot) {
-                        if (snapshot.data != null) {
-                          var dataKendaraan = snapshot.data!.data();
-                          return Column(
-                            children: [
-                              ContainerDetailPengendara(
-                                title: 'Jenis Kendaraan : ',
-                                middleText: dataKendaraan!['jenis_kendaraan'],
-                              ),
-                              ContainerDetailPengendara(
-                                title: 'Merek Kendaraan : ',
-                                middleText: dataKendaraan['merek_kendaraan'],
-                              ),
-                            ],
-                          );
-                        }
-                        return const Text('');
-                      }),
-                  FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                      future: controller
-                          .getDataPengendara(dataParkir['pengendara']),
-                      builder: (context, snapshot) {
-                        if (snapshot.data != null) {
-                          var dataPengendara = snapshot.data!.data();
-                          return ContainerDetailPengendara(
-                            title: 'Nama Pengendara : ',
-                            middleText: dataPengendara!['nama'],
-                          );
-                        }
-                        return const Text('');
-                      }),
+                  ContainerDetailPengendara(
+                    title: 'Jenis Kendaraan : ',
+                    middleText: dataParkir['jenis_kendaraan'],
+                  ),
+                  ContainerDetailPengendara(
+                    title: 'Merek Kendaraan : ',
+                    middleText: dataParkir['merek_kendaraan'],
+                  ),
+                  ContainerDetailPengendara(
+                    title: 'Nama Pengendara : ',
+                    middleText: dataParkir['nama_pengendara'],
+                  ),
                   ContainerDetailPengendara(
                     title: 'Masuk : ',
                     middleText:
                         DateFormat('dd-MM-yyyy, HH:mm').format(jamMasuk),
                   ),
-                  FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                      future: controller
-                          .getDataPetugas(dataParkir['petugas_masuk']),
-                      builder: (context, snapshot) {
-                        if (snapshot.data != null) {
-                          var dataPetugas = snapshot.data!.data()!;
-                          return ContainerDetailPengendara(
-                              title: 'Petugas Masuk :',
-                              middleText: dataPetugas['nama']);
-                        }
-                        return Text('');
-                      }),
+                  ContainerDetailPengendara(
+                      title: 'Petugas Masuk :',
+                      middleText: dataParkir['petugas_masuk']),
                   ContainerDetailPengendara(
                     title: 'Keluar : ',
                     middleText:
                         DateFormat('dd-MM-yyyy, HH:mm').format(jamKeluar),
                   ),
-                  FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                      future: controller
-                          .getDataPetugas(dataParkir['petugas_keluar']),
-                      builder: (context, snapshot) {
-                        if (snapshot.data != null) {
-                          var dataPetugas = snapshot.data!.data()!;
-                          return ContainerDetailPengendara(
-                              title: 'Petugas Keluar :',
-                              middleText: dataPetugas['nama']);
-                        }
-                        return Text('');
-                      }),
+                  ContainerDetailPengendara(
+                      title: 'Petugas Keluar :',
+                      middleText: dataParkir['petugas_keluar']),
                   ContainerDetailPengendara(
                     title: 'Lama Parkir : ',
                     middleText: '${durasi[0]} Jam, ${durasi[1]} Menit',

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unbaja_parking_app/app/modules/home/controllers/home_controller.dart';
 import 'package:unbaja_parking_app/app/modules/home/widgets/container_pengaturan_profil.dart';
-import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/container_detail_pengendara_widget.dart';
+import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/widgets/container_detail_pengendara_widget.dart';
 import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:unbaja_parking_app/app/modules/kendaraan_tamu/controllers/kendaraan_tamu_controller.dart';
-import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/container_detail_pengendara_widget.dart';
+import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/widgets/container_detail_pengendara_widget.dart';
 import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 
 class KendaraanTamuKeluarDetailView extends GetView<KendaraanTamuController> {
@@ -40,29 +40,20 @@ class KendaraanTamuKeluarDetailView extends GetView<KendaraanTamuController> {
                   ),
                   ContainerDetailPengendara(
                     title: 'Merek Kendaraan : ',
-                    middleText: dataParkir['merek'],
+                    middleText: dataParkir['merek_kendaraan'],
                   ),
                   ContainerDetailPengendara(
                     title: 'Nama Pengendara : ',
-                    middleText: dataParkir['pengendara'],
+                    middleText: dataParkir['nama_pengendara'],
                   ),
                   ContainerDetailPengendara(
                     title: 'Masuk : ',
                     middleText:
                         DateFormat('dd-MM-yyyy, HH:mm').format(jamMasuk),
                   ),
-                  FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                      future: controller
-                          .getDataPetugas(dataParkir['petugas_masuk']),
-                      builder: (context, snapshot) {
-                        if (snapshot.data != null) {
-                          var dataPetugas = snapshot.data!.data()!;
-                          return ContainerDetailPengendara(
-                              title: 'Petugas Masuk :',
-                              middleText: dataPetugas['nama']);
-                        }
-                        return Text('');
-                      }),
+                  ContainerDetailPengendara(
+                      title: 'Petugas Masuk :',
+                      middleText: dataParkir['petugas_masuk']),
                   ContainerDetailPengendara(
                     title: 'Lama Parkir : ',
                     middleText: '${durasi[0]} Jam, ${durasi[1]} Menit',

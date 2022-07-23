@@ -114,14 +114,14 @@ class PetugasView extends GetView<HomeController> {
                   icon: Icons.qr_code,
                   onPressed: () {
                     Get.toNamed(Routes.QRCODE_SCANNER,
-                        arguments: controller.uid);
+                        arguments: controller.nameUser.value);
                   }),
               MenuButton(
                   label: 'Pengendara Umum / Tamu',
                   icon: Icons.directions_car,
                   onPressed: () {
                     Get.toNamed(Routes.KENDARAAN_TAMU,
-                        arguments: controller.uid);
+                        arguments: controller.nameUser.value);
                   }),
               MenuButton(
                   label: 'Kendaraan Terparkir',

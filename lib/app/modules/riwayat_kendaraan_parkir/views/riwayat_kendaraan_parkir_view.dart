@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 import 'package:unbaja_parking_app/app/widgets/list_kendaraan_terparkir.dart';
-import 'package:unbaja_parking_app/app/widgets/list_kendaraan_terparkir_tamu.dart';
 
 import '../controllers/riwayat_kendaraan_parkir_controller.dart';
 
@@ -97,38 +96,25 @@ class RiwayatKendaraanParkirView
                             itemBuilder: (context, index) {
                               var dataKendaraan = listKendaraan[index].data();
                               print('DATA KENDARAAN ${dataKendaraan}');
-                              if (dataKendaraan['kendaraan'] == null) {
-                                return ListKendaraanTerparkirTamu(
-                                    onTap: () =>
-                                        Get.toNamed(
-                                            Routes
-                                                .DETAIL_RIWAYAT_KENDARAAN_PARKIR,
-                                            arguments: [
-                                              listKendaraan[index].reference.id
-                                            ]),
-                                    keteranganParkir: 'keluar',
-                                    dataWaktu: dataKendaraan['keluar'],
-                                    keteranganParkirColor: Colors.red,
-                                    jenisKendaraan:
-                                        dataKendaraan['jenis_kendaraan'],
-                                    nomorPlat: dataKendaraan['nomor_plat'],
-                                    merekKendaraan: dataKendaraan['merek']);
-                              }
                               return ListKendaraanTerparkir(
-                                  onTap: () => Get.toNamed(
-                                          Routes
-                                              .DETAIL_RIWAYAT_KENDARAAN_PARKIR,
-                                          arguments: [
-                                            listKendaraan[index].reference.id,
-                                            dataKendaraan['kendaraan'],
-                                            dataKendaraan['pengendara'],
-                                          ]),
-                                  streamDataKendaraan:
-                                      controller.getDataKendaraan(
-                                          dataKendaraan['kendaraan']),
-                                  keteranganParkir: 'keluar',
-                                  dataWaktu: dataKendaraan['keluar'],
-                                  keteranganParkirColor: Colors.red);
+                                onTap: () => Get.toNamed(
+                                    Routes.DETAIL_RIWAYAT_KENDARAAN_PARKIR,
+                                    arguments: [
+                                      listKendaraan[index].reference.id
+                                    ]),
+                                keteranganParkir: 'keluar',
+                                dataWaktu: dataKendaraan['keluar'],
+                                keteranganParkirColor: Colors.red,
+                                jenisKendaraan:
+                                    dataKendaraan['jenis_kendaraan'],
+                                nomorPlat: dataKendaraan['nomor_plat'],
+                                merekKendaraan:
+                                    dataKendaraan['merek_kendaraan'],
+                                title:
+                                    (dataKendaraan['nama_pengendara'] == 'Tamu')
+                                        ? 'TAMU'
+                                        : 'MEMBER',
+                              );
                             }),
                       );
                     }

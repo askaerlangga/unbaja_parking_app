@@ -28,6 +28,7 @@ class QrcodeScannerView extends GetView<QrcodeScannerController> {
                 Get.toNamed(Routes.SCANNER_DETAIL_PENGENDARA,
                     arguments: [code, Get.arguments]);
                 debugPrint('Barcode found! $code');
+                debugPrint('Nama Petugas ${Get.arguments}');
               }
             }),
         Column(

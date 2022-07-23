@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/container_detail_pengendara_widget.dart';
+import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/widgets/container_detail_pengendara_widget.dart';
 import 'package:unbaja_parking_app/app/modules/petugas/qrcode_scanner/controllers/qrcode_scanner_controller.dart';
 import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 
@@ -25,9 +25,10 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
               snapshot.data?.data() != null) {
             var dataKendaraan = snapshot.data!.data() as Map<String, dynamic>;
             controller.idKendaraan = Get.arguments[0];
-            controller.idPengendara = dataKendaraan['pemilik'];
-            controller.idPetugas = Get.arguments[1];
-            controller.nomorPlat = dataKendaraan['nomor_plat'];
+            // controller.idPengendara = dataKendaraan['pemilik'];
+            controller.parkir.nomorPlat = dataKendaraan['nomor_plat'];
+            controller.parkir.jenisKendaraan = dataKendaraan['jenis_kendaraan'];
+            controller.parkir.merekKendaraan = dataKendaraan['merek_kendaraan'];
             return ListView(
               padding: const EdgeInsets.all(20),
               children: [
@@ -49,6 +50,7 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
                             snapshot.data != null) {
                           var userData =
                               snapshot.data!.data() as Map<String, dynamic>;
+                          controller.parkir.namaPengendara = userData['nama'];
                           return ContainerDetailPengendara(
                               title: 'Nama Pengendara :',
                               middleText: userData['nama']);
@@ -56,10 +58,11 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
                         return const Text('');
                       }),
                   FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      future: controller.getDataParkir(controller.idKendaraan!),
+                      future: controller.getDataParkir(Get.arguments[0]),
                       builder: (context, snapshot) {
+                        print('HEYYYY ${snapshot.data?.docs}');
                         if (snapshot.data != null &&
-                            snapshot.data!.docs.length > 0) {
+                            snapshot.data!.docs.isNotEmpty) {
                           var dataParkir = (snapshot.data!.docs[0]).data();
                           controller.idParkir =
                               (snapshot.data!.docs[0]).reference.id;
@@ -79,19 +82,9 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
                                   title: 'Masuk :',
                                   middleText: DateFormat('dd-MM-yyyy, HH:mm')
                                       .format(jamMasuk)),
-                              FutureBuilder<
-                                      DocumentSnapshot<Map<String, dynamic>>>(
-                                  future: controller.getDataPetugas(
-                                      dataParkir['petugas_masuk']),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.data != null) {
-                                      var dataPetugas = snapshot.data!.data()!;
-                                      return ContainerDetailPengendara(
-                                          title: 'Petugas Masuk :',
-                                          middleText: dataPetugas['nama']);
-                                    }
-                                    return Text('');
-                                  }),
+                              ContainerDetailPengendara(
+                                  title: 'Petugas Masuk :',
+                                  middleText: dataParkir['petugas_masuk']),
                               ContainerDetailPengendara(
                                   title: 'Lama Parkir :',
                                   middleText:
@@ -108,8 +101,10 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
                       label: 'PROSES',
                       onPressed: () {
                         if (active == null || active == false) {
+                          controller.parkir.petugasMasuk = Get.arguments[1];
                           controller.parkirMasuk();
                         } else {
+                          controller.parkir.petugasKeluar = Get.arguments[1];
                           controller.parkirKeluar(controller.idParkir!);
                         }
                       })

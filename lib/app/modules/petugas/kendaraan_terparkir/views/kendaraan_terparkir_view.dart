@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 import 'package:unbaja_parking_app/app/widgets/list_kendaraan_terparkir.dart';
-import 'package:unbaja_parking_app/app/widgets/list_kendaraan_terparkir_tamu.dart';
+import 'package:unbaja_parking_app/app/widgets/list_kendaraan_terparkir.dart';
 
 import '../controllers/kendaraan_terparkir_controller.dart';
 
@@ -63,39 +63,29 @@ class KendaraanTerparkirView extends GetView<KendaraanTerparkirController> {
                             itemBuilder: (context, index) {
                               var dataKendaraan = listKendaraan[index].data();
                               print('DATA KENDARAAN ${dataKendaraan}');
-                              if (dataKendaraan['kendaraan'] == null) {
-                                return ListKendaraanTerparkirTamu(
-                                    onTap: () => Get.toNamed(
-                                            Routes.DETAIL_KENDARAAN_TERPARKIR,
-                                            arguments: [
-                                              listKendaraan[index].reference.id
-                                            ]),
-                                    keteranganParkir: 'masuk',
-                                    dataWaktu: dataKendaraan['masuk'],
-                                    keteranganParkirColor: Colors.green,
-                                    jenisKendaraan:
-                                        dataKendaraan['jenis_kendaraan'],
-                                    nomorPlat: dataKendaraan['nomor_plat'],
-                                    merekKendaraan: dataKendaraan['merek']);
-                              }
                               return ListKendaraanTerparkir(
                                   onTap: () => Get.toNamed(
                                           Routes.DETAIL_KENDARAAN_TERPARKIR,
                                           arguments: [
-                                            listKendaraan[index].reference.id,
-                                            dataKendaraan['kendaraan'],
-                                            dataKendaraan['pengendara'],
+                                            listKendaraan[index].reference.id
                                           ]),
-                                  streamDataKendaraan:
-                                      controller.getDataKendaraan(
-                                          dataKendaraan['kendaraan']),
+                                  title: (dataKendaraan['nama_pengendara'] ==
+                                          'Tamu')
+                                      ? 'TAMU'
+                                      : 'MEMBER',
                                   keteranganParkir: 'masuk',
                                   dataWaktu: dataKendaraan['masuk'],
-                                  keteranganParkirColor: Colors.green);
+                                  keteranganParkirColor: Colors.green,
+                                  jenisKendaraan:
+                                      dataKendaraan['jenis_kendaraan'],
+                                  nomorPlat: dataKendaraan['nomor_plat'],
+                                  merekKendaraan:
+                                      dataKendaraan['merek_kendaraan']);
                             }),
                       );
                     }
-                    return const Center(child: Text('Tidak ada kendaraan'));
+                    return const Center(
+                        child: Text('Tidak ada kendaraan terparkir'));
                   }
                   return const Center(child: CircularProgressIndicator());
                 },

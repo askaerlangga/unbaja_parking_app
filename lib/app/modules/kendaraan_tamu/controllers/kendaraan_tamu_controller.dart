@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unbaja_parking_app/app/models/parkir.dart';
 import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 
 class KendaraanTamuController extends GetxController {
   final db = FirebaseFirestore.instance;
+  var parkir = Parkir();
   TextEditingController merek = TextEditingController();
   TextEditingController nomorPlat = TextEditingController();
   String? dropdownValue;
@@ -14,12 +16,17 @@ class KendaraanTamuController extends GetxController {
   void parkirMasuk() {
     if (dropdownValue != null && merek.text != '' && nomorPlat.text != '') {
       db.collection('parking').add({
-        'masuk': FieldValue.serverTimestamp(),
-        'jenis_kendaraan': dropdownValue,
-        'merek': merek.text,
         'nomor_plat': nomorPlat.text,
-        'pengendara': 'Tamu',
+        // 'nomor_plat': parkir.nomorPlat,
+        'jenis_kendaraan': dropdownValue,
+        // 'jenis_kendaraan': parkir.jenisKendaraan,
+        'merek_kendaraan': merek.text,
+        // 'merek_kendaraan': parkir.merekKendaraan,
+        'nama_pengendara': 'Tamu',
+        // 'nama_pengendara': parkir.namaPengendara,
+        'masuk': FieldValue.serverTimestamp(),
         'petugas_masuk': idPetugas,
+        // 'petugas_masuk': parkir.petugasMasuk,
         'active': true
       });
       Get.back();
@@ -34,7 +41,7 @@ class KendaraanTamuController extends GetxController {
         .collection('parking')
         .where('nomor_plat', isEqualTo: nomorPlat.text.toUpperCase())
         .where('active', isEqualTo: true)
-        .where('pengendara', isEqualTo: 'Tamu')
+        .where('nama_pengendara', isEqualTo: 'Tamu')
         .get()
         .then((value) {
       if (value.docs.isNotEmpty) {

@@ -2,11 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:unbaja_parking_app/app/models/parkir.dart';
 import 'package:unbaja_parking_app/app/routes/app_pages.dart';
 
 class QrcodeScannerController extends GetxController {
   var db = FirebaseFirestore.instance;
-  String? idPengendara;
+  var parkir = Parkir();
+
+  // String? idPengendara;
   String? idKendaraan;
   String? idPetugas;
   String? idParkir;
@@ -31,7 +34,7 @@ class QrcodeScannerController extends GetxController {
       String idKendaraan) {
     var dataParkir = db.collection('parking');
     return dataParkir
-        .where('kendaraan', isEqualTo: idKendaraan)
+        .where('nomor_plat', isEqualTo: parkir.nomorPlat)
         .where('active', isEqualTo: true)
         .get();
   }
@@ -58,23 +61,30 @@ class QrcodeScannerController extends GetxController {
     });
   }
 
+  // Fungsi parkir masuk
   void parkirMasuk() {
     db.collection('parking').add({
+      'nomor_plat': parkir.nomorPlat,
+      'jenis_kendaraan': parkir.jenisKendaraan,
+      'merek_kendaraan': parkir.merekKendaraan,
+      'nama_pengendara': parkir.namaPengendara,
+      // 'masuk': FieldValue.serverTimestamp(),
       'masuk': FieldValue.serverTimestamp(),
-      'kendaraan': idKendaraan,
-      'pengendara': idPengendara,
-      'petugas_masuk': idPetugas,
-      'nomor_plat': nomorPlat,
+      // 'kendaraan': idKendaraan,
+      // 'pengendara': idPengendara,
+      'petugas_masuk': parkir.petugasMasuk, // Nama Petugas
+
       'active': true
     });
     Get.back();
     Get.defaultDialog(middleText: 'Kendaraan Masuk');
   }
 
+  // Fungsi parkir keluar
   void parkirKeluar(String idParkir) {
     db.collection('parking').doc(idParkir).update({
       'keluar': FieldValue.serverTimestamp(),
-      'petugas_keluar': idPetugas,
+      'petugas_keluar': parkir.petugasKeluar, // Nama Petugas
       'active': false
     });
     Get.back();
