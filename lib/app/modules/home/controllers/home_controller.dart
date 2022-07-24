@@ -80,4 +80,14 @@ class HomeController extends GetxController {
         .snapshots();
     return listKendaraan;
   }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getJumlahPengguna() {
+    var listPengguna = db.collection('users').snapshots();
+    return listPengguna;
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getJumlahKendaraan() {
+    var listKendaraan = db.collection('vehicles').snapshots();
+    return listKendaraan;
+  }
 }
