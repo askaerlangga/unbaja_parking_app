@@ -68,7 +68,7 @@ class AdminView extends GetView<HomeController> {
                 height: 10,
               ),
               StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                  stream: controller.getJumlahPengguna(),
+                  stream: controller.getJumlahKendaraan(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.active &&
                         snapshot.data != null &&
@@ -115,7 +115,12 @@ class AdminView extends GetView<HomeController> {
                   onPressed: () {
                     Get.toNamed(Routes.RIWAYAT_KENDARAAN_PARKIR);
                   }),
-              MenuButton(label: 'Laporan', icon: Icons.print, onPressed: () {}),
+              MenuButton(
+                  label: 'Laporan',
+                  icon: Icons.print,
+                  onPressed: () {
+                    Get.toNamed(Routes.LAPORAN);
+                  }),
             ],
           ),
         ),

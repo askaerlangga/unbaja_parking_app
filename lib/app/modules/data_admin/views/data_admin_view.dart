@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:unbaja_parking_app/app/routes/app_pages.dart';
+import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 
-import '../controllers/data_pengendara_controller.dart';
+import '../controllers/data_admin_controller.dart';
 
-class DataPengendaraView extends GetView<DataPengendaraController> {
-  const DataPengendaraView({Key? key}) : super(key: key);
+class DataAdminView extends GetView<DataAdminController> {
+  const DataAdminView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Data Pengendara'),
+          title: const Text('Data Admin'),
           centerTitle: true,
         ),
         body: Column(
@@ -44,12 +45,20 @@ class DataPengendaraView extends GetView<DataPengendaraController> {
                     border: const OutlineInputBorder()),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+              child: CustomButton(
+                  label: 'Tambah Admin',
+                  onPressed: () {
+                    Get.toNamed(Routes.TAMBAH_AKUN, arguments: 'admin');
+                  }),
+            ),
             Obx(
               () => StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                 stream: (controller.searchKeyword.value != null &&
                         controller.searchKeyword.value != '')
-                    ? controller.searchListPengendara()
-                    : controller.getListPengendara(),
+                    ? controller.searchListAdmin()
+                    : controller.getListAdmin(),
                 builder: (context, snapshot) {
                   if (snapshot.data != null && snapshot.data!.docs.isNotEmpty) {
                     var listPengendara = snapshot.data!.docs;
@@ -61,8 +70,7 @@ class DataPengendaraView extends GetView<DataPengendaraController> {
                           itemBuilder: (context, index) {
                             var dataPengendara = listPengendara[index];
                             return GestureDetector(
-                              onTap: () => Get.toNamed(
-                                  Routes.DATA_PENGENDARA_DETAIL,
+                              onTap: () => Get.toNamed(Routes.DATA_ADMIN_DETAIL,
                                   arguments:
                                       listPengendara[index].reference.id),
                               child: Card(
@@ -109,7 +117,7 @@ class DataPengendaraView extends GetView<DataPengendaraController> {
                     );
                   }
                   return const Center(
-                    child: Text('Tidak ada data pengendara'),
+                    child: Text('Tidak ada data Admin'),
                   );
                 },
               ),

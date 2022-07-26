@@ -1,7 +1,16 @@
 import 'package:get/get.dart';
 
+import '../modules/data_admin/bindings/data_admin_binding.dart';
+import '../modules/data_admin/views/data_admin_detail_view.dart';
+import '../modules/data_admin/views/data_admin_view.dart';
+import '../modules/data_kendaraan/bindings/data_kendaraan_binding.dart';
+import '../modules/data_kendaraan/views/data_kendaraan_view.dart';
 import '../modules/data_pengendara/bindings/data_pengendara_binding.dart';
+import '../modules/data_pengendara/views/data_pengendara_detail_view.dart';
 import '../modules/data_pengendara/views/data_pengendara_view.dart';
+import '../modules/data_petugas/bindings/data_petugas_binding.dart';
+import '../modules/data_petugas/views/data_petugas_detail_view.dart';
+import '../modules/data_petugas/views/data_petugas_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -38,6 +47,10 @@ import '../modules/riwayat_kendaraan_parkir/views/detail_riwayat_kendaraan_parki
 import '../modules/riwayat_kendaraan_parkir/views/riwayat_kendaraan_parkir_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
+import '../modules/tambah_akun/bindings/tambah_akun_binding.dart';
+import '../modules/tambah_akun/views/tambah_akun_view.dart';
+import '../modules/ubah_data_pengguna/bindings/ubah_data_pengguna_binding.dart';
+import '../modules/ubah_data_pengguna/views/ubah_data_pengguna_view.dart';
 
 part 'app_routes.dart';
 
@@ -157,9 +170,49 @@ class AppPages {
       binding: DataPengendaraBinding(),
     ),
     GetPage(
+      name: _Paths.DATA_PENGENDARA_DETAIL,
+      page: () => const DataPengendaraDetailView(),
+      binding: DataPengendaraBinding(),
+    ),
+    GetPage(
       name: _Paths.LAPORAN,
       page: () => const LaporanView(),
       binding: LaporanBinding(),
+    ),
+    GetPage(
+      name: _Paths.UBAH_DATA_PENGGUNA,
+      page: () => const UbahDataPenggunaView(),
+      binding: UbahDataPenggunaBinding(),
+    ),
+    GetPage(
+      name: _Paths.DATA_ADMIN,
+      page: () => const DataAdminView(),
+      binding: DataAdminBinding(),
+    ),
+    GetPage(
+      name: _Paths.DATA_ADMIN_DETAIL,
+      page: () => const DataAdminDetailView(),
+      binding: DataAdminBinding(),
+    ),
+    GetPage(
+      name: _Paths.DATA_PETUGAS,
+      page: () => const DataPetugasView(),
+      binding: DataPetugasBinding(),
+    ),
+    GetPage(
+      name: _Paths.DATA_PETUGAS_DETAIL,
+      page: () => const DataPetugasDetailView(),
+      binding: DataPetugasBinding(),
+    ),
+    GetPage(
+      name: _Paths.TAMBAH_AKUN,
+      page: () => const TambahAkunView(),
+      binding: TambahAkunBinding(),
+    ),
+    GetPage(
+      name: _Paths.DATA_KENDARAAN,
+      page: () => const DataKendaraanView(),
+      binding: DataKendaraanBinding(),
     ),
   ];
 }

@@ -23,11 +23,17 @@ class MenuDataPenggunaView extends GetView {
                   Get.toNamed(Routes.DATA_PENGENDARA);
                 }),
             MenuButton(
-                label: 'Data Petugas', icon: Icons.person, onPressed: () {}),
+                label: 'Data Petugas',
+                icon: Icons.person,
+                onPressed: () {
+                  Get.toNamed(Routes.DATA_PETUGAS);
+                }),
             MenuButton(
                 label: 'Data Admin',
                 icon: Icons.admin_panel_settings,
-                onPressed: () {}),
+                onPressed: () {
+                  Get.toNamed(Routes.DATA_ADMIN);
+                }),
           ],
         ));
   }

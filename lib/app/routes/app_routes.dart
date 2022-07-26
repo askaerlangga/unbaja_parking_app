@@ -27,7 +27,15 @@ abstract class Routes {
   static const DETAIL_RIWAYAT_KENDARAAN_PARKIR =
       _Paths.DETAIL_RIWAYAT_KENDARAAN_PARKIR;
   static const DATA_PENGENDARA = _Paths.DATA_PENGENDARA;
+  static const DATA_PENGENDARA_DETAIL = _Paths.DATA_PENGENDARA_DETAIL;
   static const LAPORAN = _Paths.LAPORAN;
+  static const UBAH_DATA_PENGGUNA = _Paths.UBAH_DATA_PENGGUNA;
+  static const DATA_ADMIN = _Paths.DATA_ADMIN;
+  static const DATA_ADMIN_DETAIL = _Paths.DATA_ADMIN_DETAIL;
+  static const DATA_PETUGAS = _Paths.DATA_PETUGAS;
+  static const DATA_PETUGAS_DETAIL = _Paths.DATA_PETUGAS_DETAIL;
+  static const TAMBAH_AKUN = _Paths.TAMBAH_AKUN;
+  static const DATA_KENDARAAN = _Paths.DATA_KENDARAAN;
 }
 
 abstract class _Paths {
@@ -55,5 +63,13 @@ abstract class _Paths {
   static const DETAIL_RIWAYAT_KENDARAAN_PARKIR =
       '/detail-riwayat-kendaraan-parkir';
   static const DATA_PENGENDARA = '/data-pengendara';
+  static const DATA_PENGENDARA_DETAIL = '/data-pengendara-detail';
   static const LAPORAN = '/laporan';
+  static const UBAH_DATA_PENGGUNA = '/ubah-data-pengguna';
+  static const DATA_ADMIN = '/data-admin';
+  static const DATA_ADMIN_DETAIL = '/data-admin-detail';
+  static const DATA_PETUGAS = '/data-petugas';
+  static const DATA_PETUGAS_DETAIL = '/data-petugas-detail';
+  static const TAMBAH_AKUN = '/tambah-akun';
+  static const DATA_KENDARAAN = '/data-kendaraan';
 }
