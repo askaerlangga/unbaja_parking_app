@@ -36,6 +36,8 @@ abstract class Routes {
   static const DATA_PETUGAS_DETAIL = _Paths.DATA_PETUGAS_DETAIL;
   static const TAMBAH_AKUN = _Paths.TAMBAH_AKUN;
   static const DATA_KENDARAAN = _Paths.DATA_KENDARAAN;
+  static const DATA_KENDARAAN_DETAIL = _Paths.DATA_KENDARAAN_DETAIL;
+  static const UBAH_DATA_KENDARAAN = _Paths.UBAH_DATA_KENDARAAN;
 }
 
 abstract class _Paths {
@@ -72,4 +74,6 @@ abstract class _Paths {
   static const DATA_PETUGAS_DETAIL = '/data-petugas-detail';
   static const TAMBAH_AKUN = '/tambah-akun';
   static const DATA_KENDARAAN = '/data-kendaraan';
+  static const DATA_KENDARAAN_DETAIL = '/data-kendaraan-detail';
+  static const UBAH_DATA_KENDARAAN = '/ubah-data-kendaraan';
 }

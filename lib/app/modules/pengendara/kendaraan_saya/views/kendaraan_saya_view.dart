@@ -33,9 +33,9 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
                         itemCount: listKendaraan.length,
                         itemBuilder: (context, index) {
                           print('PRINT INI ${listKendaraan[index]}');
-                          return FutureBuilder<
+                          return StreamBuilder<
                                   DocumentSnapshot<Map<String, dynamic>>>(
-                              future: controller
+                              stream: controller
                                   .getListKendaraan(listKendaraan[index]),
                               builder: (context, snapshot) {
                                 if (snapshot.data != null) {
@@ -77,24 +77,44 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
                                         ),
                                         IconButton(
                                             onPressed: () {
-                                              Get.defaultDialog(
-                                                  title: 'Kendaraan Utama',
-                                                  middleText:
-                                                      'Jadikan kendaraan ini kendaraan utama?',
-                                                  onCancel: () => Get.back(),
-                                                  onConfirm: () {
-                                                    controller
-                                                        .setKendaraanUtama(
-                                                            controller.uid,
-                                                            listKendaraan[
-                                                                index]);
-                                                    Get.back();
-                                                    Get.defaultDialog(
-                                                        title:
-                                                            'Berhasil Mengubah',
-                                                        middleText:
-                                                            'Kendaraan ini sekarang menjadi kendaraan utama');
-                                                  });
+                                              if (userData['kendaraan_utama'] ==
+                                                  listKendaraan[index]) {
+                                                Get.defaultDialog(
+                                                    title: 'Kendaraan Utama',
+                                                    middleText:
+                                                        'Hapus kendaraan ini dari kendaraan utama?',
+                                                    onCancel: () => Get.back(),
+                                                    onConfirm: () {
+                                                      controller
+                                                          .unsetKendaraanUtama(
+                                                              controller.uid);
+                                                      Get.back();
+                                                      Get.defaultDialog(
+                                                          title:
+                                                              'Berhasil Mengubah',
+                                                          middleText:
+                                                              'Kendaraan ini sekarang bukan menjadi kendaraan utama');
+                                                    });
+                                              } else {
+                                                Get.defaultDialog(
+                                                    title: 'Kendaraan Utama',
+                                                    middleText:
+                                                        'Jadikan kendaraan ini kendaraan utama?',
+                                                    onCancel: () => Get.back(),
+                                                    onConfirm: () {
+                                                      controller
+                                                          .setKendaraanUtama(
+                                                              controller.uid,
+                                                              listKendaraan[
+                                                                  index]);
+                                                      Get.back();
+                                                      Get.defaultDialog(
+                                                          title:
+                                                              'Berhasil Mengubah',
+                                                          middleText:
+                                                              'Kendaraan ini sekarang menjadi kendaraan utama');
+                                                    });
+                                              }
                                             },
                                             icon:
                                                 (userData['kendaraan_utama'] ==
@@ -120,9 +140,16 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
                                         const SizedBox(width: 10),
                                         IconButton(
                                             onPressed: () {
-                                              controller.hapusKendaraan(
-                                                  Get.arguments,
-                                                  listKendaraan[index]);
+                                              if (listKendaraan[index] ==
+                                                  userData['kendaraan_utama']) {
+                                                Get.defaultDialog(
+                                                    middleText:
+                                                        'Kendaraan ini adalah kendaraan utama, silahkan unset terlebih dahulu');
+                                              } else {
+                                                controller.hapusKendaraan(
+                                                    Get.arguments,
+                                                    listKendaraan[index]);
+                                              }
                                             },
                                             icon: Icon(Icons.delete)),
                                       ]),

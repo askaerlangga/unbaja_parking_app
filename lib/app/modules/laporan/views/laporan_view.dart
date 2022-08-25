@@ -21,7 +21,7 @@ class LaporanView extends GetView<LaporanController> {
           child: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
               future: controller.getDateRange(),
               builder: (context, snapshot) {
-                if (snapshot.data != null) {
+                if (snapshot.data?.docs.isEmpty == false) {
                   var firstDate =
                       snapshot.data?.docs.first.data()['keluar'] as Timestamp;
 
@@ -96,7 +96,7 @@ class LaporanView extends GetView<LaporanController> {
                         }),
                   );
                 }
-                return Text('data');
+                return Text('Tidak ada laporan tersedia');
               }),
         ));
   }

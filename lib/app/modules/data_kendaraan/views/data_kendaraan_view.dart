@@ -3,17 +3,16 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:unbaja_parking_app/app/routes/app_pages.dart';
-import 'package:unbaja_parking_app/app/widgets/custom_button.dart';
 
-import '../controllers/data_petugas_controller.dart';
+import '../controllers/data_kendaraan_controller.dart';
 
-class DataPetugasView extends GetView<DataPetugasController> {
-  const DataPetugasView({Key? key}) : super(key: key);
+class DataKendaraanView extends GetView<DataKendaraanController> {
+  const DataKendaraanView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Data Petugas'),
+          title: const Text('Data Kendaraan'),
           centerTitle: true,
         ),
         body: Column(
@@ -31,7 +30,7 @@ class DataPetugasView extends GetView<DataPetugasController> {
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Masukan Nama Pengguna',
+                    hintText: 'Masukan Nomor Plat Kendaraan',
                     suffixIcon: IconButton(
                       icon: const Icon(
                         Icons.search,
@@ -41,24 +40,16 @@ class DataPetugasView extends GetView<DataPetugasController> {
                             controller.searchController.text;
                       },
                     ),
-                    labelText: 'Cari Pengguna',
+                    labelText: 'Cari Kendaraan',
                     border: const OutlineInputBorder()),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: CustomButton(
-                  label: 'Tambah Petugas',
-                  onPressed: () {
-                    Get.toNamed(Routes.TAMBAH_AKUN, arguments: 'petugas');
-                  }),
             ),
             Obx(
               () => StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                 stream: (controller.searchKeyword.value != null &&
                         controller.searchKeyword.value != '')
-                    ? controller.searchListPetugas()
-                    : controller.getListPetugas(),
+                    ? controller.searchListKendaraan()
+                    : controller.getListKendaraan(),
                 builder: (context, snapshot) {
                   if (snapshot.data != null && snapshot.data!.docs.isNotEmpty) {
                     var listPengendara = snapshot.data!.docs;
@@ -71,7 +62,7 @@ class DataPetugasView extends GetView<DataPetugasController> {
                             var dataPengendara = listPengendara[index];
                             return GestureDetector(
                               onTap: () => Get.toNamed(
-                                  Routes.DATA_PETUGAS_DETAIL,
+                                  Routes.DATA_KENDARAAN_DETAIL,
                                   arguments:
                                       listPengendara[index].reference.id),
                               child: Card(
@@ -88,7 +79,7 @@ class DataPetugasView extends GetView<DataPetugasController> {
                                             CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Text(
-                                            '${dataPengendara['nama']}',
+                                            '${dataPengendara['nomor_plat']}',
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
                                             style: const TextStyle(
@@ -96,7 +87,7 @@ class DataPetugasView extends GetView<DataPetugasController> {
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Text(
-                                            '${dataPengendara['status']}',
+                                            '${dataPengendara['merek_kendaraan']}',
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
                                           )
@@ -118,7 +109,7 @@ class DataPetugasView extends GetView<DataPetugasController> {
                     );
                   }
                   return const Center(
-                    child: Text('Tidak ada data Petugas'),
+                    child: Text('Tidak ada data pengendara'),
                   );
                 },
               ),

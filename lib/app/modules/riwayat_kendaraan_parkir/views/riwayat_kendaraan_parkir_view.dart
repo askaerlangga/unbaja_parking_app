@@ -51,7 +51,7 @@ class RiwayatKendaraanParkirView
           FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
               future: controller.getDateRange(),
               builder: (context, snapshot) {
-                if (snapshot.data != null) {
+                if (snapshot.data?.docs.isEmpty == false) {
                   var firstDate =
                       snapshot.data?.docs.first.data()['keluar'] as Timestamp;
 
@@ -75,7 +75,7 @@ class RiwayatKendaraanParkirView
                         }),
                   );
                 }
-                return Text('data');
+                return Text('');
               }),
 
           Obx(() => StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -118,7 +118,8 @@ class RiwayatKendaraanParkirView
                             }),
                       );
                     }
-                    return const Center(child: Text('Tidak ada kendaraan'));
+                    return const Center(
+                        child: Text('Tidak ada riwayat parkir'));
                   }
                   return const Center(child: CircularProgressIndicator());
                 },

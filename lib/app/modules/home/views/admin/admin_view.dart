@@ -102,7 +102,9 @@ class AdminView extends GetView<HomeController> {
               MenuButton(
                   label: 'Data Kendaraan',
                   icon: Icons.directions_car,
-                  onPressed: () {}),
+                  onPressed: () {
+                    Get.toNamed(Routes.DATA_KENDARAAN);
+                  }),
               MenuButton(
                   label: 'Kendaraan Terparkir',
                   icon: Icons.local_parking,

@@ -4,6 +4,7 @@ import '../modules/data_admin/bindings/data_admin_binding.dart';
 import '../modules/data_admin/views/data_admin_detail_view.dart';
 import '../modules/data_admin/views/data_admin_view.dart';
 import '../modules/data_kendaraan/bindings/data_kendaraan_binding.dart';
+import '../modules/data_kendaraan/views/data_kendaraan_detail_view.dart';
 import '../modules/data_kendaraan/views/data_kendaraan_view.dart';
 import '../modules/data_pengendara/bindings/data_pengendara_binding.dart';
 import '../modules/data_pengendara/views/data_pengendara_detail_view.dart';
@@ -49,6 +50,8 @@ import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/tambah_akun/bindings/tambah_akun_binding.dart';
 import '../modules/tambah_akun/views/tambah_akun_view.dart';
+import '../modules/ubah_data_kendaraan/bindings/ubah_data_kendaraan_binding.dart';
+import '../modules/ubah_data_kendaraan/views/ubah_data_kendaraan_view.dart';
 import '../modules/ubah_data_pengguna/bindings/ubah_data_pengguna_binding.dart';
 import '../modules/ubah_data_pengguna/views/ubah_data_pengguna_view.dart';
 
@@ -213,6 +216,16 @@ class AppPages {
       name: _Paths.DATA_KENDARAAN,
       page: () => const DataKendaraanView(),
       binding: DataKendaraanBinding(),
+    ),
+    GetPage(
+      name: _Paths.DATA_KENDARAAN_DETAIL,
+      page: () => const DataKendaraanDetailView(),
+      binding: DataKendaraanBinding(),
+    ),
+    GetPage(
+      name: _Paths.UBAH_DATA_KENDARAAN,
+      page: () => const UbahDataKendaraanView(),
+      binding: UbahDataKendaraanBinding(),
     ),
   ];
 }

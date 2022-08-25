@@ -43,7 +43,7 @@ class HomeView extends GetView<HomeController> {
 
       return const Scaffold(
         body: Center(
-          child: Text('UserUID tidak Tersedia'),
+          child: CircularProgressIndicator(),
         ),
       );
     });
