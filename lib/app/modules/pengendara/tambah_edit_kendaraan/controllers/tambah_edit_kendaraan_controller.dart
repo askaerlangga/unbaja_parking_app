@@ -5,10 +5,28 @@ import 'package:get/get.dart';
 
 class TambahEditKendaraanController extends GetxController {
   final db = FirebaseFirestore.instance;
-  TextEditingController merek = TextEditingController();
+
+  TextEditingController warna = TextEditingController();
   TextEditingController nomorPlat = TextEditingController();
-  String? dropdownValue;
-  List<String> dropdownItems = ['Sepeda Motor', 'Mobil'];
+  TextEditingController modelLainnya = TextEditingController();
+
+  var jenisKendaraanValue = ''.obs;
+  List<String> jenisKendaraanItems = ['Sepeda Motor', 'Mobil'];
+
+  var merekKendaraanActive = false.obs;
+  var merekKendaraanValue = ''.obs;
+  var merekKendaraanItems = {}.obs;
+
+  Map<String, dynamic> dataMotor = {};
+  Map<String, dynamic> dataMobil = {};
+
+  var modelValue = ''.obs;
+  var modelItems = [].obs;
+
+  Future<QuerySnapshot<Map<String, dynamic>>> getJenisKendaraan() {
+    var jenisKendaraan = db.collection('jenis-kendaraan').get();
+    return jenisKendaraan;
+  }
 
   Future<Map<String, dynamic>> getUserData(String uid) {
     var userData = db.collection('users').doc(uid).get().then((value) {
@@ -18,13 +36,15 @@ class TambahEditKendaraanController extends GetxController {
     return userData;
   }
 
-  void tambahKendaraan(
-      String uid, String jenisKendaraan, String merek, String nomorPlat) async {
+  void tambahKendaraan(String uid, String jenis, String merek, String model,
+      String warna, String nomorPlat) async {
     String? idKendaraan;
     try {
       await db.collection('vehicles').add({
-        'jenis_kendaraan': jenisKendaraan,
-        'merek_kendaraan': merek,
+        'jenis': jenis,
+        'merek': merek,
+        'model': model,
+        'warna': warna,
         'nomor_plat': nomorPlat.toUpperCase(),
         'pemilik': uid
       }).then((value) {
@@ -58,8 +78,8 @@ class TambahEditKendaraanController extends GetxController {
 
   void ubahKendaraan(String idKendaraan, String jenisKendaraan, String merek,
       String nomorPlat) async {
-    if (dropdownValue != null &&
-        this.merek.text != '' &&
+    if (jenisKendaraanValue != null &&
+        this.merekKendaraanValue.value != '' &&
         this.nomorPlat.text != '') {
       try {
         await db.collection('vehicles').doc(idKendaraan).update({

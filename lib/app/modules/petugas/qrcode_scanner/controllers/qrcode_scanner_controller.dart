@@ -65,14 +65,17 @@ class QrcodeScannerController extends GetxController {
   void parkirMasuk() {
     db.collection('parking').add({
       'nomor_plat': parkir.nomorPlat,
-      'jenis_kendaraan': parkir.jenisKendaraan,
-      'merek_kendaraan': parkir.merekKendaraan,
+      'jenis': parkir.jenisKendaraan,
+      'merek': parkir.merekKendaraan,
+      'model': parkir.model,
+      'warna': parkir.warna,
       'nama_pengendara': parkir.namaPengendara,
       // 'masuk': FieldValue.serverTimestamp(),
       'masuk': FieldValue.serverTimestamp(),
       // 'kendaraan': idKendaraan,
       // 'pengendara': idPengendara,
       'petugas_masuk': parkir.petugasMasuk, // Nama Petugas
+      'lokasi': parkir.lokasi,
 
       'active': true
     });

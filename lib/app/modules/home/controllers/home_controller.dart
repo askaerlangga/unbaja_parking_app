@@ -90,4 +90,21 @@ class HomeController extends GetxController {
     var listKendaraan = db.collection('vehicles').snapshots();
     return listKendaraan;
   }
+
+  // Penugasan
+  String? penugasanValue;
+  List<String> penugasanItems = ['Kampus 1', 'Kampus 2'];
+
+  // Ubah tempat bertugas
+  void ubahPenugasan(String uid, String lokasi) {
+    Get.defaultDialog(
+        middleText: 'Ubah tempat bertugas?',
+        textConfirm: 'Ubah',
+        textCancel: 'Batal',
+        onConfirm: () {
+          db.collection('users').doc(uid).update({'penugasan': lokasi});
+          Get.back();
+          Get.defaultDialog(middleText: 'Tempat bertugas berhasil diubah!');
+        });
+  }
 }

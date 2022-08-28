@@ -76,11 +76,10 @@ class KendaraanTerparkirView extends GetView<KendaraanTerparkirController> {
                                   keteranganParkir: 'masuk',
                                   dataWaktu: dataKendaraan['masuk'],
                                   keteranganParkirColor: Colors.green,
-                                  jenisKendaraan:
-                                      dataKendaraan['jenis_kendaraan'],
+                                  jenisKendaraan: dataKendaraan['jenis'],
                                   nomorPlat: dataKendaraan['nomor_plat'],
                                   merekKendaraan:
-                                      dataKendaraan['merek_kendaraan']);
+                                      '${dataKendaraan['merek']} ${dataKendaraan['model']}');
                             }),
                       );
                     }

@@ -105,11 +105,10 @@ class RiwayatKendaraanParkirView
                                 keteranganParkir: 'keluar',
                                 dataWaktu: dataKendaraan['keluar'],
                                 keteranganParkirColor: Colors.red,
-                                jenisKendaraan:
-                                    dataKendaraan['jenis_kendaraan'],
+                                jenisKendaraan: dataKendaraan['jenis'],
                                 nomorPlat: dataKendaraan['nomor_plat'],
                                 merekKendaraan:
-                                    dataKendaraan['merek_kendaraan'],
+                                    '${dataKendaraan['merek']} ${dataKendaraan['model']}',
                                 title:
                                     (dataKendaraan['nama_pengendara'] == 'Tamu')
                                         ? 'TAMU'

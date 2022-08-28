@@ -39,7 +39,7 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
                                   .getListKendaraan(listKendaraan[index]),
                               builder: (context, snapshot) {
                                 if (snapshot.data != null) {
-                                  var dataKendaraan = snapshot.data!.data()
+                                  var dataKendaraan = snapshot.data?.data()
                                       as Map<String, dynamic>;
                                   return Card(
                                     margin: const EdgeInsets.only(bottom: 10),
@@ -65,7 +65,7 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
                                                         FontWeight.bold),
                                               ),
                                               Text(
-                                                '${dataKendaraan['merek_kendaraan']}',
+                                                '${dataKendaraan['merek']} ${dataKendaraan['model']}',
                                                 overflow: TextOverflow.ellipsis,
                                                 maxLines: 1,
                                               )
@@ -129,10 +129,10 @@ class KendaraanSayaView extends GetView<KendaraanSayaController> {
                                                   arguments: [
                                                     listKendaraan[index],
                                                     'Ubah Kendaraan',
-                                                    dataKendaraan[
-                                                        'jenis_kendaraan'],
-                                                    dataKendaraan[
-                                                        'merek_kendaraan'],
+                                                    dataKendaraan['jenis'],
+                                                    dataKendaraan['merek'],
+                                                    dataKendaraan['model'],
+                                                    dataKendaraan['warna'],
                                                     dataKendaraan['nomor_plat']
                                                   ]);
                                             },

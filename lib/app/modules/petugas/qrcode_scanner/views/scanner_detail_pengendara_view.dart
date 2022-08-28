@@ -27,8 +27,11 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
             controller.idKendaraan = Get.arguments[0];
             // controller.idPengendara = dataKendaraan['pemilik'];
             controller.parkir.nomorPlat = dataKendaraan['nomor_plat'];
-            controller.parkir.jenisKendaraan = dataKendaraan['jenis_kendaraan'];
-            controller.parkir.merekKendaraan = dataKendaraan['merek_kendaraan'];
+            controller.parkir.jenisKendaraan = dataKendaraan['jenis'];
+            controller.parkir.merekKendaraan = dataKendaraan['merek'];
+            controller.parkir.model = dataKendaraan['model'];
+            controller.parkir.warna = dataKendaraan['warna'];
+            controller.parkir.lokasi = Get.arguments[1][1];
             return ListView(
               padding: const EdgeInsets.all(20),
               children: [
@@ -37,11 +40,13 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
                       title: 'Nomor Plat Kendaraan :',
                       middleText: dataKendaraan['nomor_plat']),
                   ContainerDetailPengendara(
-                      title: 'Jenis Kendaraan :',
-                      middleText: dataKendaraan['jenis_kendaraan']),
+                      title: 'Jenis :', middleText: dataKendaraan['jenis']),
                   ContainerDetailPengendara(
-                      title: 'Merek Kendaraan :',
-                      middleText: dataKendaraan['merek_kendaraan']),
+                      title: 'Merek :', middleText: dataKendaraan['merek']),
+                  ContainerDetailPengendara(
+                      title: 'Model :', middleText: dataKendaraan['model']),
+                  ContainerDetailPengendara(
+                      title: 'Warna :', middleText: dataKendaraan['warna']),
                   FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                       future: controller
                           .getDataPengendara(dataKendaraan['pemilik']),
@@ -86,6 +91,9 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
                                   title: 'Petugas Masuk :',
                                   middleText: dataParkir['petugas_masuk']),
                               ContainerDetailPengendara(
+                                  title: 'Lokasi :',
+                                  middleText: dataParkir['lokasi']),
+                              ContainerDetailPengendara(
                                   title: 'Lama Parkir :',
                                   middleText:
                                       '${durasi[0]} Jam, ${durasi[1]} Menit'),
@@ -101,10 +109,10 @@ class ScannerDetailPengendaraView extends GetView<QrcodeScannerController> {
                       label: 'PROSES',
                       onPressed: () {
                         if (active == null || active == false) {
-                          controller.parkir.petugasMasuk = Get.arguments[1];
+                          controller.parkir.petugasMasuk = Get.arguments[1][0];
                           controller.parkirMasuk();
                         } else {
-                          controller.parkir.petugasKeluar = Get.arguments[1];
+                          controller.parkir.petugasKeluar = Get.arguments[1][0];
                           controller.parkirKeluar(controller.idParkir!);
                         }
                       })

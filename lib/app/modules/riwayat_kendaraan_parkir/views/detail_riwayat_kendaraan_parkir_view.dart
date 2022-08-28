@@ -38,12 +38,20 @@ class DetailRiwayatKendaraanParkirView
                     middleText: dataParkir!['nomor_plat'],
                   ),
                   ContainerDetailPengendara(
-                    title: 'Jenis Kendaraan : ',
-                    middleText: dataParkir['jenis_kendaraan'],
+                    title: 'Jenis : ',
+                    middleText: dataParkir['jenis'],
                   ),
                   ContainerDetailPengendara(
-                    title: 'Merek Kendaraan : ',
-                    middleText: dataParkir['merek_kendaraan'],
+                    title: 'Merek : ',
+                    middleText: dataParkir['merek'],
+                  ),
+                  ContainerDetailPengendara(
+                    title: 'Model : ',
+                    middleText: dataParkir['model'],
+                  ),
+                  ContainerDetailPengendara(
+                    title: 'Warna : ',
+                    middleText: dataParkir['warna'],
                   ),
                   ContainerDetailPengendara(
                     title: 'Nama Pengendara : ',
@@ -57,6 +65,10 @@ class DetailRiwayatKendaraanParkirView
                   ContainerDetailPengendara(
                       title: 'Petugas Masuk :',
                       middleText: dataParkir['petugas_masuk']),
+                  ContainerDetailPengendara(
+                    title: 'Lokasi : ',
+                    middleText: dataParkir['lokasi'],
+                  ),
                   ContainerDetailPengendara(
                     title: 'Keluar : ',
                     middleText:
